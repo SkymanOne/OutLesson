@@ -13,6 +13,7 @@ namespace OutLesson.WebUI.Controllers
 			return View();
 		}
 
+		[Authorize(Roles = "moder")]
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
@@ -20,6 +21,8 @@ namespace OutLesson.WebUI.Controllers
 			return View();
 		}
 
+
+		[Authorize(Roles = "admin")]
 		public ActionResult Contact()
 		{
 			ViewBag.Message = "Your contact page.";

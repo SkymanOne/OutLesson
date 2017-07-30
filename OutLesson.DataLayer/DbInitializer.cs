@@ -11,7 +11,7 @@ using OutLesson.DataLayer;
 
 namespace OutLesson.DataLayer
 {
-	class DbInitializer : DropCreateDatabaseAlways<ApplicationContext>
+	public class DbInitializer : DropCreateDatabaseAlways<ApplicationContext>
 	{
 		protected override void Seed(ApplicationContext context)
 		{
@@ -30,8 +30,21 @@ namespace OutLesson.DataLayer
 			roleManager.Create(userRole);
 
 			var admin = new ApplicationUser { Email = "german.nikolishin@gmail.com", UserName = "german.nikolishin@gmail.com", FullName = "SkymanOne" };
-			string pass = "gn_vneuroka";
-			var result = userManager.Create(admin, pass);
+			string adminPass = "gn_vneuroka";
+			var adminResult = userManager.Create(admin, adminPass);
+
+			var moder = new ApplicationUser { Email = "nikgolubtsov@gmail.com", UserName = "nikgolubtsov@gmail.com", FullName = "nikgolubtsov" };
+			string moderPass = "ng_vneuroka";
+			var moderResult = userManager.Create(moder, moderPass);
+
+			if (adminResult.Succeeded & moderResult.Succeeded )
+			{
+				userManager.AddToRole(admin.Id, adminRole.Name);
+				userManager.AddToRole(admin.Id, userRole.Name);
+
+				userManager.AddToRole(moder.Id, moderRole.Name);
+				userManager.AddToRole(moder.Id, moderRole.Name);
+			}
 
 			base.Seed(context);
 		}
