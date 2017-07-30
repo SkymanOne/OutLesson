@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OutLesson.DataLayer.ObjectModels
 {
-	class Post
+	public class Post
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }

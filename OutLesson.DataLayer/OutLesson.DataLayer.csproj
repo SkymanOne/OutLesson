@@ -96,6 +96,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="ApplicationRoleManager.cs" />
+    <Compile Include="DbInitializer.cs" />
+    <Compile Include="Migrations\201707301707358_RoleMigrations.cs" />
+    <Compile Include="Migrations\201707301707358_RoleMigrations.Designer.cs">
+      <DependentUpon>201707301707358_RoleMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObjectModels\ApplicationRole.cs" />
     <Compile Include="ObjectModels\ApplicationUser.cs" />
     <Compile Include="ApplicationUserManager.cs" />
@@ -106,6 +113,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707301707358_RoleMigrations.resx">
+      <DependentUpon>201707301707358_RoleMigrations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

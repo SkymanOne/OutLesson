@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OutLesson.DataLayer.ObjectModels
 {
-	class Tag
+	public class Tag
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

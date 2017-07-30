@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OutLesson.DataLayer.ObjectModels
 {
-	class ApplicationUser : IdentityUser
+	public class ApplicationUser : IdentityUser
 	{
 		public int Year { get; set; }
 		public string FullName { get; set; }

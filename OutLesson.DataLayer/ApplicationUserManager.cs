@@ -11,7 +11,7 @@ using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer
 {
-	class ApplicationUserManager : UserManager<ApplicationUser>
+	public class ApplicationUserManager : UserManager<ApplicationUser>
 	{
 		public ApplicationUserManager(IUserStore<ApplicationUser> store)
 		: base(store)
