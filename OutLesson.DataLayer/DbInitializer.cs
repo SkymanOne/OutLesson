@@ -39,11 +39,15 @@ namespace OutLesson.DataLayer
 
 			if (adminResult.Succeeded & moderResult.Succeeded )
 			{
-				userManager.AddToRole(admin.Id, adminRole.Name);
-				userManager.AddToRole(admin.Id, userRole.Name);
+				userManager.AddToRoles(admin.Id, new string[]
+				{
+					adminRole.Name, moderRole.Name, writerRole.Name, userRole.Name
+				});
 
-				userManager.AddToRole(moder.Id, moderRole.Name);
-				userManager.AddToRole(moder.Id, moderRole.Name);
+				userManager.AddToRoles(moder.Id, new string[]
+				{
+					moderRole.Name, writerRole.Name, userRole.Name
+				});
 			}
 
 			base.Seed(context);

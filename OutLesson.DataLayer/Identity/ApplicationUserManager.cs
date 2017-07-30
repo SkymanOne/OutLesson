@@ -24,5 +24,10 @@ namespace OutLesson.DataLayer
 			ApplicationUserManager manager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
 			return manager;
 		}
+
+		internal void AddToRoles(string id, object p)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
