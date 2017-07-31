@@ -27,9 +27,19 @@ namespace OutLesson.WebUI.Controllers
 		private IAuthenticationManager AuthenticationManager
 		{
 			get
-			{
+			{    
 				return HttpContext.GetOwinContext().Authentication;
 			}
+		}
+
+		[HttpGet]
+		[Authorize]
+		public async Task<ActionResult> Index()
+		{
+			ApplicationUser user = null;
+			user = await ApplicationUserManager.FindByEmailAsync(User.Identity.Name);
+
+			return View(user);
 		}
 
 		public ActionResult Login(string returnUrl)
@@ -58,13 +68,23 @@ namespace OutLesson.WebUI.Controllers
 						IsPersistent = true
 					}, claim);
 					if (String.IsNullOrEmpty(returnUrl))
-						return RedirectToAction("Home", "Index");
+						return RedirectToAction("Index", "Home");
 					return Redirect(returnUrl);
+				}
+				else
+				{
+					ModelState.AddModelError("", "Неверный логин или пароль");
 				}
 			}
 			ViewBag.ReturnUrl = returnUrl;
 
 			return View();
+		}
+
+		public ActionResult LogOut()
+		{
+			AuthenticationManager.SignOut();
+			return RedirectToAction("Login");
 		}
 
     }

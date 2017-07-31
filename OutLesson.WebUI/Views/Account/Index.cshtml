@@ -1,0 +1,20 @@
+﻿@model OutLesson.DataLayer.ObjectModels.ApplicationUser
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container body-content">
+    <br />
+    <h4>ApplicationUser</h4>
+
+    <hr />
+    <ul style="font-size: x-large;"  class="list-group">
+        <li>Ваш ник: @Html.DisplayFor(model => model.FullName)</li>
+        <li>Ваш email: @Html.DisplayFor(model => model.Email)</li>
+        <li>Ваш возраст: @Html.DisplayFor(model => model.Year)</li>
+        <li>Статьи, написанные вами: (не реализовано)</li>
+    </ul>
+    @Html.ActionLink("Домой", "Index", "Home", new {@clas = "btn btn-default" })
+</div>
