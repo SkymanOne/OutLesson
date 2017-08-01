@@ -1,20 +1,26 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
     background-color: #e7eced;
 }
 
-html {
-    overflow-x: hidden;
-}
 
 .ulclas {
     color: darkgray;
     font-size: medium;
 }
 
+footer {
+    padding-top: 10px;
+}
+
 #LoginForm {
-    align-content:center;
+    background-color: white;
+    margin-top: 60px;
+
+}
+
+#MainContent {
+    margin-top:20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -74,19 +80,19 @@ textarea {
     color: #999;
 }
 
-
 /*
  * Main column and sidebar layout
  */
 
 .blog-aside {
     background-color: #ffffff;
-    border-radius: 3px;
+    border-radius: 5px;
+    margin-left:40px;
 }
 
 .blog-main {
     font-size: 18px;
-    border-radius: 3px;
+    border-radius: 5px;
     line-height: 1.5;
     background-color: #ffffff;
 }

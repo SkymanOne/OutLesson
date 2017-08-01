@@ -8,6 +8,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
 </head>
 <body>
     <div class="blog-nav navbar navbar-inverse navbar-fixed-top">
@@ -40,13 +41,14 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" id="MainContent">
         @RenderBody()
         <hr />
-        <footer class="container bottom">
-            <p>&copy; @DateTime.Now.Year – #ВнеУрока Corp.</p>
-        </footer>
     </div>
+    <footer class="container bottom">
+
+        <p>&copy; @DateTime.Now.Year – #ВнеУрока Corp.</p>
+    </footer>
 
 
     @Scripts.Render("~/bundles/jquery")
