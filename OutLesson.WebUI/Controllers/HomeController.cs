@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OutLesson.DataLayer;
+using OutLesson.WebUI.Models;
+using OutLesson.DataLayer.ObjectModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace OutLesson.WebUI.Controllers
 {
@@ -13,7 +18,6 @@ namespace OutLesson.WebUI.Controllers
 			return View();
 		}
 
-		[Authorize(Roles = "admin, moder")]
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";

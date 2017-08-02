@@ -16,11 +16,13 @@ footer {
 #LoginForm {
     background-color: white;
     margin-top: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
 
 }
 
 #MainContent {
-    margin-top:20px;
+    margin-top:50px;
 }
 
 /* Set padding to keep content from hitting the edges */
