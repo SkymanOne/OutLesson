@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
 using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer.Repositories
 {
-	class UserRepository : IRepostory<ApplicationUser>
+	internal class UserRepository : IRepostory<ApplicationUser>
 	{
 		private ApplicationUserManager userManager;
 
@@ -21,7 +17,6 @@ namespace OutLesson.DataLayer.Repositories
 
 		public void Create(ApplicationUser item)
 		{
-			
 		}
 
 		public void Delete(int id)

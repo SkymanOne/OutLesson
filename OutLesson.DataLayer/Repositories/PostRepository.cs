@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer.Repositories
 {
 	public class PostRepository : IRepostory<Post>
 	{
-		private ApplicationContext db;
+		private readonly ApplicationContext db;
 
-		public PostRepository (ApplicationContext context)
+		public PostRepository(ApplicationContext context)
 		{
-			this.db = context;
+			db = context;
 		}
 
 		public void Create(Post item)
@@ -23,11 +20,9 @@ namespace OutLesson.DataLayer.Repositories
 
 		public void Delete(int id)
 		{
-			Post post = db.Posts.Find(id);
+			var post = db.Posts.Find(id);
 			if (post != null)
-			{
 				db.Posts.Remove(post);
-			}
 		}
 
 		public Post Get(int id)
@@ -42,7 +37,7 @@ namespace OutLesson.DataLayer.Repositories
 
 		public void Update(Post item)
 		{
-			db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+			db.Entry(item).State = EntityState.Modified;
 		}
 	}
 }
