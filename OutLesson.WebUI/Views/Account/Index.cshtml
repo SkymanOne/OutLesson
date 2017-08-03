@@ -4,7 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-
+<div class="container-fluid">
+    
 <div class="body-content">
     <br />
     <h4>ApplicationUser</h4>
@@ -15,6 +16,29 @@
         <li>Ваш email: @Html.DisplayFor(model => model.Email)</li>
         <li>Ваш возраст: @Html.DisplayFor(model => model.Year)</li>
         <li>Статьи, написанные вами: (не реализовано)</li>
+        <li>
+            @if (User.IsInRole("admin"))
+            {
+                ViewBag.Role = "Admin";
+            }
+             
+            @if (User.IsInRole("moder"))
+            {
+                ViewBag.Role = "moder";
+            }
+             
+            @if (User.IsInRole("writer"))
+            {
+                ViewBag.Role = "Редактор";
+            }
+            @if (User.IsInRole("user"))
+            {
+                ViewBag.Role = "Пользователь";
+            }
+            
+            Ваша роль: @ViewBag.Role
+        </li>
     </ul>
     @Html.ActionLink("Домой", "Index", "Home", new {@clas = "btn btn-default" })
+</div>
 </div>

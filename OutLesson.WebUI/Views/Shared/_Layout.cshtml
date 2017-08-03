@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,7 +14,7 @@
 </head>
 <body>
     <div class="blog-nav navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container-fluid" id="NavBar">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -32,7 +34,7 @@
                 <ul class="ulclas nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Здравствуйте, " + User.Identity.Name, "Index", "Account")</li>
+                    <li>@Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName(), "Index", "Account")</li>
                         <li>@Html.ActionLink("Предложить статью","Offerpost", "Blog")</li>
                         <li>@Html.ActionLink("Выйти", "LogOut", "Account")</li>}
                     @if (!User.Identity.IsAuthenticated)
@@ -42,11 +44,11 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" id="MainContent">
+    <div id="MainContent">
         @RenderBody()
         <hr />
     </div>
-    <footer class="container bottom">
+    <footer class="container-fluid bottom" id="MainFooter">
 
         <p>&copy; @DateTime.Now.Year – #ВнеУрока Org.</p>
     </footer>
