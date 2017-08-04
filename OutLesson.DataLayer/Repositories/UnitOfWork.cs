@@ -9,6 +9,7 @@ namespace OutLesson.DataLayer.Repositories
 		private bool disposed;
 		private PostRepository postRepository;
 		private TagRepository tagRepository;
+		private OfferPostRepository offerPostRepository;
 
 		public TagRepository Tags
 		{
@@ -27,6 +28,17 @@ namespace OutLesson.DataLayer.Repositories
 				if (postRepository == null)
 					postRepository = new PostRepository(db);
 				return postRepository;
+			}
+		}
+
+		private OfferPostRepository OfferPosts
+		{
+			get
+			{
+				if (offerPostRepository == null)
+					offerPostRepository = new OfferPostRepository(db);
+				return offerPostRepository;
+
 			}
 		}
 

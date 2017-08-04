@@ -115,6 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ObjectModels\Tag.cs" />
     <Compile Include="Repositories\IRepostory.cs" />
+    <Compile Include="Repositories\OfferPostRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
