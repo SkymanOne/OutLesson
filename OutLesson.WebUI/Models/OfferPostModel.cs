@@ -24,6 +24,9 @@ namespace OutLesson.WebUI.Models
 		[Display(Name = "Дата публикации")]
 		public DateTime Time { get; set; }
 
+		[HiddenInput]
+		public ApplicationUser Autor { get; set; }
+
 		//TODO: релизовать добавление тэгов
 	}
 }

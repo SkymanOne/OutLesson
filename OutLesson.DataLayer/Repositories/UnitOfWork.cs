@@ -4,40 +4,43 @@ namespace OutLesson.DataLayer.Repositories
 {
 	public class UnitOfWork : IDisposable
 	{
-		private readonly ApplicationContext db = new ApplicationContext();
+		private readonly ApplicationContext _db = new ApplicationContext();
 
-		private bool disposed;
-		private PostRepository postRepository;
-		private TagRepository tagRepository;
-		private OfferPostRepository offerPostRepository;
+		private bool _disposed;
+		private PostRepository _postRepository;
+		private TagRepository _tagRepository;
+		private OfferPostRepository _offerPostRepository;
 
-		public TagRepository Tags
+
+		//public UnitOfWork(ApplicationContext context)
+		//{
+		//	db = context;
+		//}
+
+		public ApplicationContext DataContext
 		{
-			get
-			{
-				if (tagRepository == null)
-					tagRepository = new TagRepository(db);
-				return tagRepository;
-			}
+			get { return _db; }
 		}
+
+		public TagRepository Tags => _tagRepository ?? (_tagRepository = new TagRepository(_db));
 
 		public PostRepository Posts
 		{
 			get
 			{
-				if (postRepository == null)
-					postRepository = new PostRepository(db);
-				return postRepository;
+				if (_postRepository == null)
+					_postRepository = new PostRepository(_db);
+				return _postRepository;
 			}
 		}
 
-		private OfferPostRepository OfferPosts
+		public OfferPostRepository OfferPosts
 		{
 			get
 			{
-				if (offerPostRepository == null)
-					offerPostRepository = new OfferPostRepository(db);
-				return offerPostRepository;
+				if (_offerPostRepository == null)
+					_offerPostRepository = new OfferPostRepository(_db);
+				return _offerPostRepository;
 
 			}
 		}
@@ -50,16 +53,16 @@ namespace OutLesson.DataLayer.Repositories
 
 		public void Save()
 		{
-			db.SaveChanges();
+			_db.SaveChanges();
 		}
 
 		public virtual void Dispose(bool disposing)
 		{
-			if (!disposed)
+			if (!_disposed)
 			{
 				if (disposing)
-					db.Dispose();
-				disposed = true;
+					_db.Dispose();
+				_disposed = true;
 			}
 		}
 	}
