@@ -14,22 +14,16 @@ using System.Threading.Tasks;
 
 namespace OutLesson.WebUI.Controllers
 {
-    public class AccountController : Controller
-    {
+	public class AccountController : Controller
+	{
 		private ApplicationUserManager ApplicationUserManager
 		{
-			get
-			{
-				return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-			}
-		} 
+			get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+		}
 
 		private IAuthenticationManager AuthenticationManager
 		{
-			get
-			{   
-				return HttpContext.GetOwinContext().Authentication;
-			}
+			get { return HttpContext.GetOwinContext().Authentication; }
 		}
 
 		[HttpGet]
@@ -61,7 +55,8 @@ namespace OutLesson.WebUI.Controllers
 				user = await ApplicationUserManager.FindAsync(model.Email, model.Password);
 				if (user != null)
 				{
-					ClaimsIdentity claim = await ApplicationUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+					ClaimsIdentity claim =
+						await ApplicationUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
 					AuthenticationManager.SignOut();
 					AuthenticationManager.SignIn(new AuthenticationProperties
 					{
@@ -86,6 +81,5 @@ namespace OutLesson.WebUI.Controllers
 			AuthenticationManager.SignOut();
 			return RedirectToAction("Login");
 		}
-
-    }
+	}
 }

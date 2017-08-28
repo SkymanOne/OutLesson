@@ -11,39 +11,16 @@ namespace OutLesson.DataLayer.Repositories
 		private TagRepository _tagRepository;
 		private OfferPostRepository _offerPostRepository;
 
+		//get the repositories
 
-		//public UnitOfWork(ApplicationContext context)
-		//{
-		//	db = context;
-		//}
-
-		public ApplicationContext DataContext
-		{
-			get { return _db; }
-		}
+		public ApplicationContext DataContext => _db;
 
 		public TagRepository Tags => _tagRepository ?? (_tagRepository = new TagRepository(_db));
 
-		public PostRepository Posts
-		{
-			get
-			{
-				if (_postRepository == null)
-					_postRepository = new PostRepository(_db);
-				return _postRepository;
-			}
-		}
+		public PostRepository Posts => _postRepository ?? (_postRepository = new PostRepository(_db));
 
-		public OfferPostRepository OfferPosts
-		{
-			get
-			{
-				if (_offerPostRepository == null)
-					_offerPostRepository = new OfferPostRepository(_db);
-				return _offerPostRepository;
+		public OfferPostRepository OfferPosts => _offerPostRepository ?? (_offerPostRepository = new OfferPostRepository(_db));
 
-			}
-		}
 
 		public void Dispose()
 		{

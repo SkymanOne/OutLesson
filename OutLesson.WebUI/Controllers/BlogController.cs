@@ -17,12 +17,11 @@ using OutLesson.DataLayer.Repositories;
 namespace OutLesson.WebUI.Controllers
 {
 	[Authorize]
-    public class BlogController : Controller
+	public class BlogController : Controller
 	{
-
 		private readonly UnitOfWork _unitOfWork;
 
-	    private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+		private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
 		public BlogController()
 		{
@@ -32,9 +31,9 @@ namespace OutLesson.WebUI.Controllers
 		//TODO: Определиться с правами доступа на запрос!
 		[HttpGet]
 		public ActionResult OfferPost()
-	    {
-		    return View();
-	    }
+		{
+			return View();
+		}
 
 
 		[HttpPost]
@@ -52,11 +51,9 @@ namespace OutLesson.WebUI.Controllers
 				_unitOfWork.Save();
 
 				return View("Success", currentUser);
-
 			}
 
 			return View(model);
 		}
-
 	}
 }
