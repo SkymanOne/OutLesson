@@ -6,7 +6,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -25,17 +24,17 @@
                 <a class="navbar-brand" href="/home/index"><img src="~/Content/img/logo.png" width="160" height="40"/></a>
             </div>
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-                <ul class="ulclas nav navbar-nav">
+                <ul class="ulclas nav navbar-nav nav-pills" id="menu">
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = ""}, new {})</li>
                     <li>@Html.ActionLink("О программе", "About", "Home", new { area = ""}, new {})</li>
                     <li>@Html.ActionLink("Контакт", "Contact", "Home", new { area = ""}, new {})</li>
                 </ul>
 
-                <ul class="ulclas nav navbar-nav navbar-right">
+                <ul class="ulclas nav navbar-nav navbar-right nav-pills">
                     @if (User.Identity.IsAuthenticated)
                     {
                     <li>@Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName(), "Index", "Account")</li>
-                        <li>@Html.ActionLink("Предложить статью","Offerpost", "Blog")</li>
+                        <li>@Html.ActionLink("В админку","Index", "Home", new {area = "Admin"}, new {})</li>
                         <li>@Html.ActionLink("Выйти", "LogOut", "Account")</li>}
                     @if (!User.Identity.IsAuthenticated)
                     {

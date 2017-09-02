@@ -18,6 +18,13 @@ namespace OutLesson.DataLayer
 		{
 			var db = context.Get<ApplicationContext>();
 			var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+
+			manager.PasswordValidator = new PasswordValidator()
+			{
+				RequireLowercase = true,
+				RequiredLength = 6,
+			};
+
 			return manager;
 		}
 	}

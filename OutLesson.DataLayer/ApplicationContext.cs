@@ -18,5 +18,7 @@ namespace OutLesson.DataLayer
 		{
 			return new ApplicationContext();
 		}
+
+
 	}
 }

@@ -52,20 +52,9 @@ namespace OutLesson.DataLayer
 			var adminPass = "gn_vneuroka";
 			var adminResult = userManager.Create(admin, adminPass);
 
-			var moder = new ApplicationUser
-			{
-				Email = "nikgolubtsov@gmail.com",
-				UserName = "nikgolubtsov@gmail.com",
-				FullName = "nikgolubtsov"
-			};
-			var moderPass = "ng_vneuroka";
-			var moderResult = userManager.Create(moder, moderPass);
-
-			if (adminResult.Succeeded & moderResult.Succeeded)
+			if (adminResult.Succeeded)
 			{
 				userManager.AddToRoles(admin.Id, adminRole.Name);
-
-				userManager.AddToRoles(moder.Id, moderRole.Name);
 			}
 
 			base.Seed(context);

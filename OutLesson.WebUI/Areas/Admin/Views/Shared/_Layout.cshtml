@@ -3,14 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
 </head>
 <body>
-    <div class="blog-nav navbar navbar-inverse navbar-fixed-top">
+    <div class="blog-nav navbar navbar-inverse navbar-fixed-top" id="admin-nav">
         <div class="container-fluid" id="NavBar">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -24,14 +22,17 @@
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="ulclas nav navbar-nav">
                     <li>@Html.ActionLink("Записи", "Index", "Home", new { area = "Admin" }, new {})</li>
-                    <li>@Html.ActionLink("Пользователи", "Index", "Home", new { area = "Admin" }, new {})</li>
+                    <li>@Html.ActionLink("Пользователи", "Users", "Home", new { area = "Admin" }, new {})</li>
                     <li>@Html.ActionLink("Написать статью", "Index", "Home", new { area = "Admin" }, new {})</li>
+                </ul>
+                <ul class="ulclas nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Вернуться на главную страницу", "Index", "Home", new {area = ""}, new {})</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div id="MainContent">
+    <div id="MainContentAdmin">
         @RenderBody()
         <hr />
         <footer class="container-fluid bottom" id="MainFooter">

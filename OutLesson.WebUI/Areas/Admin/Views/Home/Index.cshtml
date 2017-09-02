@@ -1,8 +1,25 @@
-﻿
+﻿@using OutLesson.DataLayer.ObjectModels
+@model OutLesson.DataLayer.Repositories.OfferPostRepository
 @{
     ViewBag.Title = "Index";
 }
-<div class="container body-content" id="MainContent">
-    <h1>Текст</h1>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6">
+            <p>Text 1</p>
+            <p>@foreach(OfferPost item in Model.GetAll())
+    {
+        //TODO: Написать вывод постов на модерацию
+    }</p>
+        </div>
+        <div class="col-xs-6">
+            @{
+                @Html.Action("GetPreviewPost", new { offerPost = new OfferPost()} )
+            }
+        </div>
+    </div>
 </div>
 

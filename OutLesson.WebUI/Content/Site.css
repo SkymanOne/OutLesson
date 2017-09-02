@@ -9,8 +9,12 @@
     font-size: medium;
 }
 
-footer {
-    padding-top: 10px;
+#admin-nav {
+    background-color: #43A047;
+}
+.navbar-inverse .navbar-nav > li > a:active, .navbar-inverse .navbar-nav > li > a:active {
+    color: #ffffff;
+    font-weight: bold;
 }
 
 #Form {
@@ -21,6 +25,15 @@ footer {
 
 }
 
+#RegisterForm {
+    background-color: white;
+    margin-top: 80px;
+    margin-left: 70px;
+    margin-right: 70px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
 .control-label {
     font-weight: initial;
     font-size: large;
@@ -28,6 +41,10 @@ footer {
 
 #MainContent {
     margin-top:50px;
+}
+
+#MainContentAdmin {
+    margin-top: 70px;
 }
 
 
@@ -64,7 +81,7 @@ footer {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 400px;
 }
 
 .blog-nav .active:after {
