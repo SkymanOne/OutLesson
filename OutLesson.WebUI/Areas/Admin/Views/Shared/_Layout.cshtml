@@ -17,12 +17,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Админ панель", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+                <a class="center-block" href="/admin/home/"><img src="~/Content/img/Admin_logo.png" /></a>
             </div>
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="ulclas nav navbar-nav">
                     <li>@Html.ActionLink("Записи", "Index", "Home", new { area = "Admin" }, new {})</li>
                     <li>@Html.ActionLink("Пользователи", "Users", "Home", new { area = "Admin" }, new {})</li>
+                    @{
+                        //TODO: создать страницу для написания статьи
+                    }
                     <li>@Html.ActionLink("Написать статью", "Index", "Home", new { area = "Admin" }, new {})</li>
                 </ul>
                 <ul class="ulclas nav navbar-nav navbar-right">

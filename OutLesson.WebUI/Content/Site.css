@@ -5,7 +5,7 @@
 
 
 .ulclas {
-    color: darkgray;
+    color: white;
     font-size: medium;
 }
 
@@ -23,6 +23,10 @@
     padding-left: 60px;
     padding-right: 60px;
 
+}
+
+#navLogo {
+    margin-bottom: 5px;
 }
 
 #RegisterForm {

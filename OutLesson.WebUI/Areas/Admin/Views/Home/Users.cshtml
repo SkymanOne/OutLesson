@@ -3,37 +3,43 @@
 
 @{
     ViewBag.Title = "Users";
+    //TODO: реализовтаь добавление и удаление пользоветелей, детализация каждого профиля
 }
 
-<h2>Users</h2>
+<div class="container-fluid body-content" id="Form">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th></th>
-    </tr>
+    <h2>Пользователи</h2>
+    @if (User.IsInRole("admin") | User.IsInRole("moder"))
+    {
+        <p>
+            @Html.ActionLink("Добавить пользовтеля", "RegisterUser")
+        </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (ApplicationUser item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
+        @foreach (ApplicationUser item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FullName)
@@ -47,12 +53,21 @@
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
+                <td>
+                    
+                    @if (User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) 
+                    } 
+                    | @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                    @if (User.IsInRole("admin"))
+                    {
+                     
+                        @Html.ActionLink("Delete", "DeleteUser", new {id = item.Id})   
+                    }
+                </td>
     </tr>
-}
+        }
 
-</table>
+    </table>
+</div>

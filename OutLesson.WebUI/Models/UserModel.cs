@@ -21,6 +21,10 @@ namespace OutLesson.WebUI.Models
 		[DataType(DataType.PhoneNumber)]
 		public int Year { get; set; }
 
+		[Display(Name = "Телефон")]
+		[DataType(DataType.PhoneNumber)]
+		public string PhoneNumber { get; set; }
+
 		[Required]
 		[DataType(DataType.Password)]
 		[Display(Name = "Введи пароль этого счастливчика")]

@@ -17,7 +17,6 @@ using OutLesson.WebUI.Models;
 
 namespace OutLesson.WebUI.Areas.Admin.Controllers
 {
-	#region New region
 
 	[Authorize(Roles = "admin, moder, writer")]
     public class HomeController : Controller
@@ -71,10 +70,19 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 				}
 
 				ApplicationUser checkUser = await UserManager.FindByEmailAsync(model.Email);
+
 				if (checkUser == null)
 				{
-					var findFullName = _unitOfWork.DataContext.Users.Single(s => s.FullName == model.FullName);
-					if (findFullName == null)
+					try
+					{
+						checkUser = _unitOfWork.DataContext.Users.Single(s => s.FullName == model.FullName);
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine(e);
+						checkUser = null;
+					}
+					if (checkUser == null)
 					{
 
 						ApplicationUser user = new ApplicationUser
@@ -82,7 +90,8 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 							UserName = model.Email,
 							Email = model.Email,
 							FullName = model.FullName,
-							Year = model.Year
+							Year = model.Year,
+							PhoneNumber = model.PhoneNumber
 						};
 						var result = await UserManager.CreateAsync(user, model.Password);
 						if (result.Succeeded)
@@ -110,7 +119,26 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 			return View(model);
 		}
 
-    }
+		[HttpGet]
+	    public async Task<ActionResult> DeleteUser(string id)
+		{
+			var user = await UserManager.FindByIdAsync(id);
 
-	#endregion
+		    return View(user);
+	    }
+
+		[HttpPost]
+	    public async Task<ActionResult> DeleteUser(string id, string returnUrl)
+		{
+			var user = await UserManager.FindByIdAsync(id);
+
+			var result = await UserManager.DeleteAsync(user);
+
+			if (result.Succeeded)
+				return RedirectToAction("Users");
+
+			return new HttpStatusCodeResult(432);
+		}
+
+    }
 }

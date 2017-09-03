@@ -33,6 +33,7 @@
                 <ul class="ulclas nav navbar-nav navbar-right nav-pills">
                     @if (User.Identity.IsAuthenticated)
                     {
+                        //TODO: добавить просмотр личного профиля
                     <li>@Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName(), "Index", "Account")</li>
                         <li>@Html.ActionLink("В админку","Index", "Home", new {area = "Admin"}, new {})</li>
                         <li>@Html.ActionLink("Выйти", "LogOut", "Account")</li>}

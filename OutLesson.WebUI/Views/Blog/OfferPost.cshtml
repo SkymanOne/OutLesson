@@ -14,14 +14,14 @@
 
 <div class="container body-content" id="Form">
 
-<h2>OfferPost</h2>
+<h2>Предложить статью</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>OfferPostModel</h4>
+        <h4>Поделитесь своей публикацией уже сейчас</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

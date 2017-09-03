@@ -1,0 +1,65 @@
+﻿@model OutLesson.DataLayer.ObjectModels.ApplicationUser
+    
+@{
+    ViewBag.Title = "Удалить пользователя";
+}
+
+<div class="container body-content" id="Form" style="padding-bottom: 10px">
+
+    <h3>Вы действительно хотите удалить этого масленка?</h3>
+        <h4>Сводка данных пользователя @Model.FullName</h4>
+        <hr />
+        <dl class="dl-horizontal" style="font-size: medium">
+            <dt>
+                Почта:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                Номер телефона:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+
+            <dt>
+                Логин:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dt>
+                Возраст:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+
+            <dt>
+                Ник:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm("DeleteUser", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="text-center">
+                <input type="submit" value="Удалить" class="btn btn-danger" /> |
+
+                @Html.ActionLink("Back to List", "Users")
+            </div>
+        }
+</div>
