@@ -52,14 +52,14 @@
 
         </dl>
 
-        @using (Html.BeginForm("DeleteUser", "Home", FormMethod.Post))
+        @using (Html.BeginForm("DeleteUser", "User", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
             <div class="text-center">
                 <input type="submit" value="Удалить" class="btn btn-danger" /> |
 
-                @Html.ActionLink("Back to List", "Users")
+                @Html.ActionLink("Back to List", "GetUsers")
             </div>
         }
 </div>

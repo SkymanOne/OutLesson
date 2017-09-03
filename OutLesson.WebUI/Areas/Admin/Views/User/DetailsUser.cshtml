@@ -1,0 +1,65 @@
+﻿@model OutLesson.DataLayer.ObjectModels.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container body-content infoUserList" id="Form" style="margin-bottom: 10px">
+
+    <h2>Информация о пользователе</h2>
+
+    <div>
+        <h4>Пользователь: @Model.FullName</h4>
+    <hr />
+    <dl class="dl-horizontal" style="font-size: medium;">
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Номер телефона:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            Логин:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            Возраст:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            Ник:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Edit", "EditUser", new { id = Model.Id })
+    }
+    |
+    @Html.ActionLink("Back to List", "GetUsers")
+</p>
+</div>

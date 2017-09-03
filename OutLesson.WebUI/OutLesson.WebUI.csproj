@@ -182,6 +182,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,10 +223,12 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\GetPreviewPost.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\RegisterUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\SuccessRegisterUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Users.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\DeleteUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\RegisterUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\SuccessRegisterUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\GetUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\User\DeleteUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\DetailsUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\EditUser.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

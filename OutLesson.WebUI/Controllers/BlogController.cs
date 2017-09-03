@@ -35,7 +35,6 @@ namespace OutLesson.WebUI.Controllers
 			return View();
 		}
 
-
 		[HttpPost]
 		public ActionResult OfferPost(OfferPostModel model)
 		{
