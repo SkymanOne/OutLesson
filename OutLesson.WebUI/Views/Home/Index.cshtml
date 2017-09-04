@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.Ajax.Utilities
+@model IEnumerable<OutLesson.DataLayer.ObjectModels.Post>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -55,22 +57,20 @@
 <div class="container-fluid body-content">
 
 <div class="col-xs-7 blog-main">
+    
+    @if (Model != null)
+    {
+         foreach (var item in Model)
+         {
+             <div class="blog-post">
+                 <h3>@item.Title</h3>
+                 <p>@item.Description</p>
+                 <p><a class="btn btn-default" href="/blog/details/@item.ShortUrl">Читать далее...</a>
+                 </p>
+             </div>
+         }
+    }
 
-    <div class="blog-post">
-        <h3>Web Hosting</h3>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-    <div class="blog-post">
-        <h3>Web Hosting</h3>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-    <div class="blog-post">
-        <h3>Web Hosting</h3>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
     <div class="blog-post">
         <h3>Web Hosting</h3>
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>

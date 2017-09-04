@@ -8,15 +8,19 @@ using OutLesson.WebUI.Models;
 using OutLesson.DataLayer.ObjectModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using OutLesson.DataLayer.Repositories;
 
 namespace OutLesson.WebUI.Controllers
 {
 	public class HomeController : Controller
 	{
+		private readonly UnitOfWork _unitOfWork = new UnitOfWork();
 
+		[HttpGet]
 		public ActionResult Index()
 		{
-			return View();
+			var list = _unitOfWork.Posts.GetAll();
+			return View(list);
 		}
 
 		public ActionResult About()

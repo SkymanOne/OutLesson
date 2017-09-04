@@ -6,38 +6,41 @@ namespace OutLesson.DataLayer.Repositories
 {
 	public class PostRepository : IRepostory<Post>
 	{
-		private readonly ApplicationContext db;
+		private readonly ApplicationContext _db;
 
 		public PostRepository(ApplicationContext context)
 		{
-			db = context;
+			_db = context;
 		}
 
 		public void Create(Post item)
 		{
-			db.Posts.Add(item);
+			lock (_db)
+			{
+				_db.Entry(item).State = EntityState.Added;
+			}
 		}
 
 		public void Delete(int id)
 		{
-			var post = db.Posts.Find(id);
+			var post = _db.Posts.Find(id);
 			if (post != null)
-				db.Posts.Remove(post);
+				_db.Posts.Remove(post);
 		}
 
 		public Post Get(int id)
 		{
-			return db.Posts.Find(id);
+			return _db.Posts.Find(id);
 		}
 
 		public IEnumerable<Post> GetAll()
 		{
-			return db.Posts;
+			return _db.Posts;
 		}
 
 		public void Update(Post item)
 		{
-			db.Entry(item).State = EntityState.Modified;
+			_db.Entry(item).State = EntityState.Modified;
 		}
 	}
 }

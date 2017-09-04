@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using OutLesson.DataLayer;
 using OutLesson.DataLayer.ObjectModels;
@@ -16,7 +17,11 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 	[Authorize(Roles = "admin, moder, writer")]
 	public class UserController : Controller
     {
-	    private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+	    private ApplicationUserManager UserManager => 
+			HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+	    private ApplicationRoleManager RoleManager =>
+		    HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
 
 	    private readonly UnitOfWork _unitOfWork = new UnitOfWork();
 
@@ -72,7 +77,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 						var result = await UserManager.CreateAsync(user, model.Password);
 						if (result.Succeeded)
 						{
-							await UserManager.AddToRolesAsync(user.Id, "user", "writer");
+							await UserManager.AddToRolesAsync(user.Id, "writer");
 							return View("SuccessRegisterUser", user);
 						}
 						else
@@ -98,8 +103,11 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<ActionResult> DeleteUser(string id)
 		{
+			if (UserManager.IsInRole(id, "superadmin"))
+			{
+				return new HttpStatusCodeResult(423);
+			}
 			var user = await UserManager.FindByIdAsync(id);
-
 			return View(user);
 		}
 

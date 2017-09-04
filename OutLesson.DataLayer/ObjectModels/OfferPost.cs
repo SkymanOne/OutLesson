@@ -13,9 +13,14 @@ namespace OutLesson.DataLayer.ObjectModels
 		public string Title { get; set; }
 
 		[AllowHtml]
+		public string Description { get; set; }
+
+		[AllowHtml]
 		public string Content { get; set; }
 
 		public DateTime Time { get; set; }
+
+		public string ShortUrl { get; set; }
 
 		public bool IsPublish { get; set; } = false;
 

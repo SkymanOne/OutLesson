@@ -12,6 +12,12 @@ namespace OutLesson.DataLayer
 			var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 			var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
+			var superAdminRole = new ApplicationRole
+			{
+				Name = "superadmin",
+				Description = "Роль супер-администратора"
+			};
+
 			//роль админа
 			var adminRole = new ApplicationRole
 			{
@@ -37,6 +43,7 @@ namespace OutLesson.DataLayer
 			var userRole = new ApplicationRole {Name = "user", Description = "Роль обыкновенного пользователя"};
 
 			//регистрируем роли
+			roleManager.Create(superAdminRole);
 			roleManager.Create(adminRole);
 			roleManager.Create(moderRole);
 			roleManager.Create(writerRole);
@@ -54,7 +61,7 @@ namespace OutLesson.DataLayer
 
 			if (adminResult.Succeeded)
 			{
-				userManager.AddToRoles(admin.Id, adminRole.Name);
+				userManager.AddToRoles(admin.Id, adminRole.Name, superAdminRole.Name);
 			}
 
 			base.Seed(context);

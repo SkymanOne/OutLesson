@@ -106,6 +106,14 @@
     <Compile Include="Migrations\201708031302347_Add new class OfferPost.Designer.cs">
       <DependentUpon>201708031302347_Add new class OfferPost.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709031626076_Added description in post and offerpost.cs" />
+    <Compile Include="Migrations\201709031626076_Added description in post and offerpost.Designer.cs">
+      <DependentUpon>201709031626076_Added description in post and offerpost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709041628164_Created ShortUrl.cs" />
+    <Compile Include="Migrations\201709041628164_Created ShortUrl.Designer.cs">
+      <DependentUpon>201709041628164_Created ShortUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObjectModels\ApplicationRole.cs" />
     <Compile Include="ObjectModels\ApplicationUser.cs" />
@@ -132,6 +140,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708031302347_Add new class OfferPost.resx">
       <DependentUpon>201708031302347_Add new class OfferPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709031626076_Added description in post and offerpost.resx">
+      <DependentUpon>201709031626076_Added description in post and offerpost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709041628164_Created ShortUrl.resx">
+      <DependentUpon>201709041628164_Created ShortUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
