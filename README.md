@@ -1,4 +1,4 @@
-# OutLesson - the platform for your cretions
+# OutLesson - the platform for your creations
 
 ### OutLesson - the media group of school 📢
 The web application "VneUroka" - is the some platform for the our news and your ideas. 
