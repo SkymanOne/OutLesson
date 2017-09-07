@@ -65,7 +65,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				Mapper.Initialize(c => c.CreateMap<CreatePostModel, Post>());
-				var currentUser = _unitOfWork.DataContext.Users.Find(User.Identity.Name);
+				var currentUser = _unitOfWork.DataContext.Users.Find(User.Identity.GetUserId());
 
 				model.Autor = currentUser;
 				model.ShortUrl = createShortUrl.ReplaceString(model.Title); 
@@ -74,6 +74,8 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 
 				_unitOfWork.Posts.Create(post);
 				_unitOfWork.Save();
+
+				return View("SuccessCreatePost", currentUser);
 			}
 			return View(model);
 		}

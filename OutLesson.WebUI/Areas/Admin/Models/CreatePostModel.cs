@@ -18,11 +18,13 @@ namespace OutLesson.WebUI.Areas.Admin.Models
 		[Required]
 		[DataType(DataType.MultilineText)]
 		[Display(Name = "Краткое описание")]
+		[AllowHtml]
 		public string Description { get; set; }
 
 		[Required]
 		[DataType(DataType.MultilineText)]
 		[Display(Name = "Содержимое")]
+		[AllowHtml]
 		public string Content { get; set; }
 
 		[Required]
