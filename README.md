@@ -1,5 +1,4 @@
-# #OutLesson (#VneUroka) - the platform for your creations [![Build status](https://ci.appveyor.com/api/projects/status/8lwjii7qedf869my/branch/develop?svg=true)](https://ci.appveyor.com/project/SkymanOne/outlesson/branch/develop)
- Status: active developing
+# #OutLesson (#VneUroka) - the platform for your creations [![Build status](https://ci.appveyor.com/api/projects/status/8lwjii7qedf869my/branch/develop?svg=true)](https://ci.appveyor.com/project/SkymanOne/outlesson/branch/develop) <img src="https://img.shields.io/badge/Satus%20of%20working-develop-orange.svg"/> <img src="https://img.shields.io/badge/Version-0.1--pre--alpha-green.svg"/> [![Join channel at Telegram](https://img.shields.io/badge/Channel-at%20Telegram-blue.svg)](https://t.me/VneUrokaDev) [![Join group at vk](https://img.shields.io/badge/Group-at%20VK-42A5F5.svg)](https://vk.com/vne_uroka)
 
 ## #VneUroka - the media group of school 📢
 The web application "VneUroka" - is the some platform for the our news and your ideas. 
