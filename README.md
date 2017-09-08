@@ -1,5 +1,5 @@
-# #OutLesson (#VneUroka) - the platform for your creations
-Status: active developing
+# #OutLesson (#VneUroka) - the platform for your creations [![Build status](https://ci.appveyor.com/api/projects/status/8lwjii7qedf869my/branch/develop?svg=true)](https://ci.appveyor.com/project/SkymanOne/outlesson/branch/develop)
+ Status: active developing
 
 ## #VneUroka - the media group of school 📢
 The web application "VneUroka" - is the some platform for the our news and your ideas. 
