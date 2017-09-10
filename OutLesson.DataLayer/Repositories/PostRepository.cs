@@ -24,8 +24,8 @@ namespace OutLesson.DataLayer.Repositories
 		public void Delete(int id)
 		{
 			var post = _db.Posts.Find(id);
-			if (post != null)
-				_db.Posts.Remove(post);
+		    if (post != null)
+		        _db.Posts.Remove(post);
 		}
 
 		public Post Get(int id)

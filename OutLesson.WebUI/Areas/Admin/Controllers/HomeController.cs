@@ -36,7 +36,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
         public ActionResult Index()
 		{
 			OfferPostRepository offerPosts = _unitOfWork.OfferPosts;
-			//TODO:
+			//TODO: реализовать вывод постов на модерацию
 
 			ViewBag.Text = createShortUrl.ReplaceString("Какой-то текст!");
 
@@ -68,7 +68,18 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 				var currentUser = _unitOfWork.DataContext.Users.Find(User.Identity.GetUserId());
 
 				model.Autor = currentUser;
-				model.ShortUrl = createShortUrl.ReplaceString(model.Title); 
+                string shortUrl = createShortUrl.ReplaceString(model.Title);
+
+			    var checkShortUrl = _unitOfWork.Posts.GetAll().Single(s => s.ShortUrl == shortUrl);
+
+			    if (checkShortUrl != null)
+			    {
+			        ModelState.AddModelError("", "Заголовки не должны совпадать");
+			    }
+
+			    model.ShortUrl = shortUrl;
+
+                
 
 				var post = Mapper.Map<CreatePostModel, Post>(model);
 

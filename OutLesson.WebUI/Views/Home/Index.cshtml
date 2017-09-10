@@ -1,7 +1,7 @@
 ﻿@using Microsoft.Ajax.Utilities
 @model IEnumerable<OutLesson.DataLayer.ObjectModels.Post>
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "#ВнеУрока";
 }
 
 
@@ -64,7 +64,7 @@
             {
             <div class="blog-post">
                 <h3>@item.Title</h3>
-                @Html.Raw(@item.Description)
+                @Html.Raw(item.Description)
                 <p>
                     <a class="btn btn-default" href="/blog/details/@item.ShortUrl">Читать далее...</a>
                 </p>

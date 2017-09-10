@@ -10,10 +10,15 @@ using Microsoft.AspNet.Identity.Owin;
 using OutLesson.DataLayer;
 using OutLesson.DataLayer.ObjectModels;
 using OutLesson.DataLayer.Repositories;
+using OutLesson.WebUI.Areas.Admin.Models;
 using OutLesson.WebUI.Models;
 
 namespace OutLesson.WebUI.Areas.Admin.Controllers
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Контроллер для взаимодествия с пользователями
+    /// </summary>
 	[Authorize(Roles = "admin, moder, writer")]
 	public class UserController : Controller
     {
@@ -136,13 +141,40 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<ActionResult> EditUser(string id)
 		{
-			Mapper.Initialize(c => c.CreateMap<ApplicationUser, UserModel>());
+			Mapper.Initialize(c => c.CreateMap<ApplicationUser, UpdateUserModel>());
 
-			var user = await UserManager.FindByIdAsync(id);
+		    if (UserManager.IsInRole(id, "superadmin"))
+		        return new HttpStatusCodeResult(432);
 
-			var userModel = Mapper.Map<ApplicationUser, UserModel>(user);
+            var user = await UserManager.FindByIdAsync(id);
+
+			var userModel = Mapper.Map<ApplicationUser, UpdateUserModel>(user);
 
 			return View(userModel);
 		}
+
+        [HttpPost]
+        public async Task<ActionResult> EditUser(UpdateUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Mapper.Initialize(c => c.CreateMap<UpdateUserModel, ApplicationUser>());
+
+                var user = Mapper.Map<UpdateUserModel, ApplicationUser>(model);
+                user.UserName = model.Email;
+
+                var result = await UserManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                    return RedirectToAction("DetailsUser", "User", new {id = user.Id});
+                ModelState.AddModelError("", "Ошибка обновления пользователя");
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error);
+                }
+            }
+            return View(model);
+        }
+
 	}
 }

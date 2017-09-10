@@ -28,7 +28,6 @@ namespace OutLesson.WebUI.Controllers
 			_unitOfWork = new UnitOfWork();
 		}
 
-		//TODO: Определиться с правами доступа на запрос!
 		[HttpGet]
 		public ActionResult OfferPost()
 		{
