@@ -70,7 +70,16 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 				model.Autor = currentUser;
                 string shortUrl = createShortUrl.ReplaceString(model.Title);
 
-			    var checkShortUrl = _unitOfWork.Posts.GetAll().Single(s => s.ShortUrl == shortUrl);
+			    Post checkShortUrl = null;
+                try
+			    {
+			        checkShortUrl = _unitOfWork.Posts.GetAll().Single(s => s.ShortUrl == shortUrl);
+			    }
+
+			    catch (InvalidOperationException e)
+			    {
+			        checkShortUrl = null;
+			    }
 
 			    if (checkShortUrl != null)
 			    {

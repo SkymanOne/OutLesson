@@ -137,7 +137,6 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 		}
 
 
-		//TODO: реализовать редактирование пользователя
 		[HttpGet]
 		public async Task<ActionResult> EditUser(string id)
 		{
@@ -163,6 +162,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
                 var user = Mapper.Map<UpdateUserModel, ApplicationUser>(model);
                 user.UserName = model.Email;
 
+                //BUG: исключение контекста при попытке обновить пользователя
                 var result = await UserManager.UpdateAsync(user);
 
                 if (result.Succeeded)

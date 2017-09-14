@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using OutLesson.DataLayer;
+using OutLesson.DataLayer.ObjectModels;
 using OutLesson.DataLayer.Repositories;
 
 namespace OutLesson.WebUI.Areas.Admin.Controllers
@@ -24,27 +25,38 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var postList = _unitOfWork.Posts.GetAll();
+            IEnumerable<Post> postList = _unitOfWork.Posts.GetAll();
+
             if (postList != null)
                 return View(postList);
             return HttpNotFound();
         }
 
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, string url)
         {
-            if (id != null)
+            if (String.IsNullOrEmpty(url))
             {
-                var post = _unitOfWork.Posts.Get(id.Value);
+                if (id != null)
+                {
+                    var post = _unitOfWork.Posts.Get(id.Value);
+                    return View(post);
+                }
+                return HttpNotFound();
+            }
+            else
+            {
+                var post = _unitOfWork.Posts.GetAll().Single(u => u.ShortUrl.Equals(url));
                 return View(post);
             }
-            return HttpNotFound();
         }
 
+
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string url)
         {
-            _unitOfWork.Posts.Delete(id);
+            var post = _unitOfWork.Posts.GetAll().Single(u => u.ShortUrl.Equals(url));
+            _unitOfWork.Posts.Delete(post.Id);
             _unitOfWork.Save();
             return RedirectToAction("Index", "Post");
         }

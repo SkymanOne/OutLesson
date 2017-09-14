@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<OutLesson.DataLayer.ObjectModels.Post>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Статьи";
 }
 
 <div class="container-fluid body-content" id="Form">
@@ -49,7 +49,7 @@
 
                     @if (User.IsInRole("moder") | User.IsInRole("admin"))
                     {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { url = item.ShortUrl })
                     }
                 </td>
             </tr>

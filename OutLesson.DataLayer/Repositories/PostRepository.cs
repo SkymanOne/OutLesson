@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer.Repositories
@@ -33,10 +35,23 @@ namespace OutLesson.DataLayer.Repositories
 			return _db.Posts.Find(id);
 		}
 
-		public IEnumerable<Post> GetAll()
+		public IEnumerable<Post> GetAllByDescending()
 		{
-			return _db.Posts;
+		    try
+		    {
+		        return from u in _db.Posts orderby u.Id descending select u;
+		    }
+		    catch (Exception e)
+		    {
+                Console.WriteLine(e.StackTrace);
+		        return null;
+		    }
 		}
+
+	    public IEnumerable<Post> GetAll()
+	    {
+	        return _db.Posts;
+	    }
 
 		public void Update(Post item)
 		{
