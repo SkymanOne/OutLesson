@@ -182,6 +182,7 @@ textarea {
 
 .blog-post {
     margin-bottom: 30px;
+    padding: 0 10px 0 10px;
 }
 
 .blog-post-title {

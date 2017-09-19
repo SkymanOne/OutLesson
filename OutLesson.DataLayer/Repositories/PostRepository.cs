@@ -35,6 +35,12 @@ namespace OutLesson.DataLayer.Repositories
 			return _db.Posts.Find(id);
 		}
 
+	    public Post GetByUrl(string url)
+	    {
+	        var post = _db.Posts.Single(s => s.ShortUrl == url);
+	        return post;
+	    }
+
 		public IEnumerable<Post> GetAllByDescending()
 		{
 		    try

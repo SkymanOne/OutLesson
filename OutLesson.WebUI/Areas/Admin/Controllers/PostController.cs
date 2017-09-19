@@ -15,6 +15,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
     /// <summary>
     /// Контроллер для взаимодействия со списком постов
     /// </summary>
+    [Authorize(Roles = "admin, moder, writer")]
     public class PostController : Controller
     {
         private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();

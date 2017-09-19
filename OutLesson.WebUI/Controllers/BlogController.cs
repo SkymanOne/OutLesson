@@ -16,7 +16,6 @@ using OutLesson.DataLayer.Repositories;
 
 namespace OutLesson.WebUI.Controllers
 {
-	[Authorize]
 	public class BlogController : Controller
 	{
 		private readonly UnitOfWork _unitOfWork;
@@ -53,5 +52,17 @@ namespace OutLesson.WebUI.Controllers
 
 			return View(model);
 		}
+
+	    public ActionResult Details(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                var post = _unitOfWork.Posts.GetByUrl(url);
+                Mapper.Initialize(c => c.CreateMap<Post, PostViewModel>());
+                PostViewModel model = Mapper.Map<Post, PostViewModel>(post);
+                return View(model);
+            }
+            return HttpNotFound();
+        }
 	}
 }

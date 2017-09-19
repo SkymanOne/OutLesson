@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.EntityClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using OutLesson.DataLayer.Repositories;
 
 namespace OutLesson.WebUI.Controllers
 {
@@ -26,14 +28,26 @@ namespace OutLesson.WebUI.Controllers
 			get { return HttpContext.GetOwinContext().Authentication; }
 		}
 
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+
 		[HttpGet]
 		[Authorize]
 		public async Task<ActionResult> Index()
 		{
-			ApplicationUser user = null;
-			user = await ApplicationUserManager.FindByEmailAsync(User.Identity.Name);
+		    UserInfoModel model = new UserInfoModel();
 
-			return View(user);
+
+            var user = await ApplicationUserManager.FindByEmailAsync(User.Identity.Name);
+		    model.User = user;
+		    lock (model)
+		    {
+		        //var posts = _unitOfWork.Posts.GetAll().Where(s => s.Autor == user).ToList();
+
+                //model.UserPosts = posts;
+		    }
+
+
+			return View(model);
 		}
 
 		public ActionResult Login(string returnUrl)

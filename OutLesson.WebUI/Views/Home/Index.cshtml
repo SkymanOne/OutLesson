@@ -14,7 +14,7 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item">
-            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+            <img class="first-slide" src="~/Content/img/Untitled-1.jpg" alt="First slide">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Example headline.</h1>
@@ -62,12 +62,15 @@
         {
             foreach (var item in Model)
             {
-            <div class="blog-post">
+            <div class="blog-post container-fluid">
                 <h3>@item.Title</h3>
-                @Html.Raw(item.Description)
-                <p>
-                    <a class="btn btn-default" href="/blog/details/@item.ShortUrl">Читать далее...</a>
-                </p>
+                <div class="text-justify">@Html.Raw(item.Description)</div>
+                <div class="col-xs-10">
+                    @Html.ActionLink("Читать далее", "Details", "Blog", new {url = item.ShortUrl}, new {@class = "btn btn-default"})
+                </div>
+                <div class="col-xs-2 text-center" style="background-color: seashell; border-radius: 5px;">
+                    @item.Time.Date.ToShortDateString()
+                </div>
             </div>
             <hr />}
         }
@@ -75,10 +78,10 @@
 
     <div class="col-xs-4 blog-aside">
         <div class="sidebar-module">
-            <h3>Web Hosting</h3>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <h3>Внимание!</h3>
+            <p>Прошу заметить, что на данный момент вы пользуетесь предварительной версией данного продукта. Мы стараемся исправить существующие проблемы и недочеты. Но всегда можем их пропустить. Свои пожелания и предложения вы можете отправить нам на content@vneuroka.space</p>
             <div class="container-fluid">
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+                <p><a class="btn btn-default" href="mailto:content@vneuroka.space">Отправить &raquo;</a></p>
             </div>
         </div>
     </div>

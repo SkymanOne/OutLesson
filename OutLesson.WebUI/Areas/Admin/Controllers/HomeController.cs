@@ -40,7 +40,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 
 			ViewBag.Text = createShortUrl.ReplaceString("Какой-то текст!");
 
-			return View(offerPosts);
+			return RedirectToAction("Index", "Post");
         }
 
 

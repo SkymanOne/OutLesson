@@ -1,0 +1,26 @@
+﻿@model OutLesson.WebUI.Models.PostViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+
+<div class="body-content container" id="Form">
+    <div class="text-center">
+        <h2>@Model.Title</h2>
+        <div class="text-info">Дата публикации: @Model.Time.Date.ToShortDateString() | Автор - @Model.Autor.FullName</div>
+        <div style="font-size: medium">
+            @Html.Raw(Model.Description)
+        </div>
+        <hr/>
+        <div style="font-size: medium; margin-top: 10px">
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+<p>
+    @if (User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Delete", "Delete", new {area = "Admin", controller = "Post", url = Model.ShortUrl})
+    }
+</p>
+</div>
