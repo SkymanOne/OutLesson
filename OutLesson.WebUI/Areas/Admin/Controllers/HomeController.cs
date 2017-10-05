@@ -60,11 +60,11 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 	    }
 
 		[HttpPost]
-		public ActionResult CreatePost(CreatePostModel model)
+		public ActionResult CreatePost(PostModel model)
 		{
 			if (ModelState.IsValid)
 			{
-				Mapper.Initialize(c => c.CreateMap<CreatePostModel, Post>());
+				Mapper.Initialize(c => c.CreateMap<PostModel, Post>());
 				var currentUser = _unitOfWork.DataContext.Users.Find(User.Identity.GetUserId());
 
 				model.Autor = currentUser;
@@ -90,7 +90,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 
                 
 
-				var post = Mapper.Map<CreatePostModel, Post>(model);
+				var post = Mapper.Map<PostModel, Post>(model);
 
 				_unitOfWork.Posts.Create(post);
 				_unitOfWork.Save();

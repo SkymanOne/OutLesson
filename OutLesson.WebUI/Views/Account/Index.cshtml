@@ -16,6 +16,10 @@
         
         <li>Статьи, написанные вами: 
             <ul style="font-size: medium;" class="list-group">
+                @foreach (var item in @Model.UserPosts)
+                {
+                    <li>@Html.ActionLink(item.Title, "Details", "Blog", new { url = item.ShortUrl }, new {})</li>
+                }
             </ul>
         </li>
        
@@ -35,6 +39,10 @@
             @if (User.IsInRole("admin"))
             {
                 ViewBag.Role = "Admin";
+            }
+            @if (User.IsInRole("superadmin"))
+            {
+                ViewBag.Role = "SuperAdmin";
             }
 
             Ваша роль: @ViewBag.Role

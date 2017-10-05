@@ -25,7 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Time)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model=> model.Autor.FullName)
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -44,12 +46,17 @@
                     @Html.DisplayFor(modelItem => item.Time)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { area = "", controller = "Blog", url = item.ShortUrl})|
+                    @Html.DisplayFor(modelItem=> item.Autor.FullName)
+                </td>
+                <td>
+                    @{//Добавить редактирование постов 
+                    }
+                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                    @Html.ActionLink("Details", "Details", new {area = "", controller = "Blog", url = item.ShortUrl})|
 
                     @if (User.IsInRole("moder") | User.IsInRole("admin"))
                     {
-                        @Html.ActionLink("Delete", "Delete", new { url = item.ShortUrl })
+                        @Html.ActionLink("Delete", "Delete", new {url = item.ShortUrl})
                     }
                 </td>
             </tr>

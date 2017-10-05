@@ -8,8 +8,11 @@ using System.Web.Mvc;
 
 namespace OutLesson.WebUI.Areas.Admin.Models
 {
-	public class CreatePostModel
+	public class PostModel
 	{
+        [HiddenInput]
+        public int Id { get; set; }
+
 		[Required]
 		[DataType(DataType.Text)]
 		[Display(Name = "Заголовок")]

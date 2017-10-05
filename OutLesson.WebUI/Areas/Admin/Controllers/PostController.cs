@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Microsoft.AspNet.Identity.Owin;
 using OutLesson.DataLayer;
 using OutLesson.DataLayer.ObjectModels;
 using OutLesson.DataLayer.Repositories;
+using OutLesson.WebUI.Areas.Admin.Models;
 
 namespace OutLesson.WebUI.Areas.Admin.Controllers
 {
@@ -31,6 +33,32 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
             if (postList != null)
                 return View(postList);
             return HttpNotFound();
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id != null)
+            {
+                var post = _unitOfWork.Posts.Get(id.Value);
+                Mapper.Initialize(cfg => cfg.CreateMap<Post, PostModel>());
+                return View(Mapper.Map<Post, PostModel>(post));
+            }
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(PostModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Mapper.Initialize(cfg => cfg.CreateMap<PostModel, Post>());
+                var post = Mapper.Map<PostModel, Post>(model);
+                _unitOfWork.Posts.Update(post);
+                _unitOfWork.Save();
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         [HttpGet]

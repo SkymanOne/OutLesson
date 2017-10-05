@@ -62,16 +62,20 @@
         {
             foreach (var item in Model)
             {
-            <div class="blog-post container-fluid">
-                <h3>@item.Title</h3>
-                <div class="text-justify">@Html.Raw(item.Description)</div>
-                <div class="col-xs-10">
-                    @Html.ActionLink("Читать далее", "Details", "Blog", new {url = item.ShortUrl}, new {@class = "btn btn-default"})
+
+                <div class="blog-post container-fluid">
+                    <div class="container">
+                        <h3>@item.Title</h3>
+                        <div class="text-justify text-left">@Html.Raw(item.Description)</div>
+                    </div>
+                    <div class="col-xs-10">
+
+                        @Html.ActionLink("Читать далее", "Details", "Blog", new { url = item.ShortUrl }, new { @class = "btn btn-default" })
+                    </div>
+                    <div class="col-xs-2 text-center" style="background-color: seashell; border-radius: 5px;">
+                        @item.Time.Date.ToShortDateString()
+                    </div>
                 </div>
-                <div class="col-xs-2 text-center" style="background-color: seashell; border-radius: 5px;">
-                    @item.Time.Date.ToShortDateString()
-                </div>
-            </div>
             <hr />}
         }
     </div>
