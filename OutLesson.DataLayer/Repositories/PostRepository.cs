@@ -37,7 +37,16 @@ namespace OutLesson.DataLayer.Repositories
 
 	    public Post GetByUrl(string url)
 	    {
-	        var post = _db.Posts.Single(s => s.ShortUrl == url);
+	        var post = new Post();
+
+	        try
+	        {
+	            post = _db.Posts.Single(s => s.ShortUrl == url);
+	        }
+	        catch (Exception e)
+	        {
+	            post = null;
+	        }
 	        return post;
 	    }
 

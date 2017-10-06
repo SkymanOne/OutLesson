@@ -28,7 +28,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<Post> postList = _unitOfWork.Posts.GetAll();
+            IEnumerable<Post> postList = _unitOfWork.Posts.GetAll().OrderByDescending(i => i.Id);
 
             if (postList != null)
                 return View(postList);

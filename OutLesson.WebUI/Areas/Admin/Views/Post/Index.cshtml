@@ -14,19 +14,22 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Заголовок
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Описание
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ShortUrl)
+                Ссылка
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Time)
+                Дата публикации
             </th>
             <th>
-                @Html.DisplayNameFor(model=> model.Autor.FullName)
+                Автор
+            </th>
+            <th>
+                Действия
             </th>
         </tr>
 
@@ -49,8 +52,6 @@
                     @Html.DisplayFor(modelItem=> item.Autor.FullName)
                 </td>
                 <td>
-                    @{//Добавить редактирование постов 
-                    }
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                     @Html.ActionLink("Details", "Details", new {area = "", controller = "Blog", url = item.ShortUrl})|
 

@@ -6,7 +6,7 @@ namespace OutLesson.DataLayer
 {
 	public class ApplicationContext : IdentityDbContext<ApplicationUser>
 	{
-		public ApplicationContext() : base("DefaultConnection")
+		public ApplicationContext() : base("OutLesson")
 		{
 		}
 

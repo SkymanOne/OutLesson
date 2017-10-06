@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -145,33 +146,37 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 		    if (UserManager.IsInRole(id, "superadmin"))
 		        return new HttpStatusCodeResult(432);
 
-            var user = await UserManager.FindByIdAsync(id);
+		    var user = _unitOfWork.DataContext.Users.Find(id);
+
+		    if (user == null)
+		        return HttpNotFound();
 
 			var userModel = Mapper.Map<ApplicationUser, UpdateUserModel>(user);
+
 
 			return View(userModel);
 		}
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditUser(UpdateUserModel model)
         {
             if (ModelState.IsValid)
             {
                 Mapper.Initialize(c => c.CreateMap<UpdateUserModel, ApplicationUser>());
-
+                var passwordHash = new PasswordHasher();
                 var user = Mapper.Map<UpdateUserModel, ApplicationUser>(model);
-                user.UserName = model.Email;
-
-                //BUG: исключение контекста при попытке обновить пользователя
-                var result = await UserManager.UpdateAsync(user);
-
-                if (result.Succeeded)
-                    return RedirectToAction("DetailsUser", "User", new {id = user.Id});
-                ModelState.AddModelError("", "Ошибка обновления пользователя");
-                foreach (var error in result.Errors)
+                user.UserName = user.Email;
+                if (!String.IsNullOrWhiteSpace(model.NewPasssword))
                 {
-                    ModelState.AddModelError("", error);
+                    user.PasswordHash = passwordHash.HashPassword(model.NewPasssword);
                 }
+                //BUG: исключение контекста при попытке обновить пользователя
+
+                _unitOfWork.DataContext.Entry(user).State = EntityState.Modified;
+                _unitOfWork.Save();
+
+                return RedirectToAction("DetailsUser", "User", new {id = user.Id});
             }
             return View(model);
         }

@@ -70,20 +70,12 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 				model.Autor = currentUser;
                 string shortUrl = createShortUrl.ReplaceString(model.Title);
 
-			    Post checkShortUrl = null;
-                try
-			    {
-			        checkShortUrl = _unitOfWork.Posts.GetAll().Single(s => s.ShortUrl == shortUrl);
-			    }
-
-			    catch (InvalidOperationException e)
-			    {
-			        checkShortUrl = null;
-			    }
+			    var checkShortUrl = _unitOfWork.Posts.GetByUrl(shortUrl);
 
 			    if (checkShortUrl != null)
 			    {
 			        ModelState.AddModelError("", "Заголовки не должны совпадать");
+			        return View(model);
 			    }
 
 			    model.ShortUrl = shortUrl;
