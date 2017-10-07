@@ -56,7 +56,7 @@
 
 <div class="container-fluid body-content">
 
-    <div class="col-xs-7 blog-main" style="margin-left: 30px;">
+    <div class=" col-sm-7 col-lg-7 blog-main" style="margin-left: 30px;">
 
         @if (Model != null)
         {
@@ -64,23 +64,25 @@
             {
 
                 <div class="blog-post container-fluid">
-                    <div class="container">
-                        <h3>@item.Title</h3>
-                        <div class="text-justify text-left">@Html.Raw(item.Description)</div>
+
+                    <div class="col-sm-12">
+                        <h3 style="margin-bottom: 5px;">@item.Title</h3>
+                        <div class="text-info" style="font-size: small">
+                            Дата публикации: @item.Time.Date.ToShortDateString() | Автор: @item.Autor.FullName
+                        </div>
+                        <div class="text-justify text-left" style="padding-top: 5px;">@Html.Raw(item.Description)</div>
                     </div>
                     <div class="col-xs-10">
 
                         @Html.ActionLink("Читать далее", "Details", "Blog", new { url = item.ShortUrl }, new { @class = "btn btn-default" })
                     </div>
-                    <div class="col-xs-2 text-center" style="background-color: seashell; border-radius: 5px;">
-                        @item.Time.Date.ToShortDateString()
-                    </div>
+
                 </div>
-            <hr />}
+                <hr />}
         }
     </div>
 
-    <div class="col-xs-4 blog-aside">
+    <div class=" col-sm-4 blog-aside">
         <div class="sidebar-module">
             <h3>Внимание!</h3>
             <p>Прошу заметить, что на данный момент вы пользуетесь предварительной версией данного продукта. Мы стараемся исправить существующие проблемы и недочеты. Но всегда можем их пропустить. Свои пожелания и предложения вы можете отправить нам на content@vneuroka.space</p>

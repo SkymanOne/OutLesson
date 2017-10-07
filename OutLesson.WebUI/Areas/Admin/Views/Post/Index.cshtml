@@ -1,4 +1,6 @@
-﻿@model IEnumerable<OutLesson.DataLayer.ObjectModels.Post>
+﻿@using Microsoft.AspNet.Identity
+@using OutLesson.DataLayer.ObjectModels
+@model IEnumerable<OutLesson.DataLayer.ObjectModels.Post>
 
 @{
     ViewBag.Title = "Статьи";
@@ -55,7 +57,7 @@
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                     @Html.ActionLink("Details", "Details", new {area = "", controller = "Blog", url = item.ShortUrl})|
 
-                    @if (User.IsInRole("moder") | User.IsInRole("admin"))
+                    @if (User.IsInRole("moder") | User.IsInRole("admin") | item.Autor.UserName == User.Identity.Name)
                     {
                         @Html.ActionLink("Delete", "Delete", new {url = item.ShortUrl})
                     }

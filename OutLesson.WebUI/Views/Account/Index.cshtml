@@ -1,7 +1,7 @@
 ﻿@model OutLesson.WebUI.Models.UserInfoModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Профиль";
 }
 
 <div class="body-content container" id="Form">
@@ -49,6 +49,6 @@
         </li>
     </ul>
     <p>Страница находится в разработке.</p>
-    <div style="padding-bottom: 10px"> @Html.ActionLink("Домой", "Index", "Home", new {@class = "btn btn-default" }) </div>
+    <div style="padding-bottom: 10px"> @Html.ActionLink("Домой", "Index", "Home", new {area = ""}, new {@class = "btn btn-default" }) </div>
 </div>
 </div>

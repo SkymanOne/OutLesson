@@ -38,7 +38,6 @@ namespace OutLesson.WebUI.Controllers
             return View(model);
         }
 
-        [ValidateAntiForgeryToken]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;

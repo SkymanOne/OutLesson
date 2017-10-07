@@ -9,18 +9,17 @@
     <div class="text-center">
         <h2>@Model.Title</h2>
         <div class="text-info">Дата публикации: @Model.Time.Date.ToShortDateString() | Автор - @Model.Autor.FullName</div>
-        <div style="font-size: medium">
-            @Html.Raw(Model.Description)
-        </div>
+            <blockquote>@Html.Raw(Model.Description)</blockquote>
         <hr/>
         <div style="font-size: medium; margin-top: 10px">
             @Html.Raw(Model.Content)
         </div>
     </div>
 <p>
-    @if (User.IsInRole("admin"))
+    @if (User.IsInRole("admin") | Model.Autor.UserName == User.Identity.Name)
     {
-        @Html.ActionLink("Delete", "Delete", new {area = "Admin", controller = "Post", url = Model.ShortUrl})
+        <p>  @Html.ActionLink("Delete", "Delete", new {area = "Admin", controller = "Post", url = Model.ShortUrl}, new {@class = "btn btn-danger" }) </p>
+        <p>  @Html.ActionLink("Edit", "Edit", "Post", new {area = "Admin", id = Model.Id }, new {@class = "btn btn-info" })</p>
     }
 </p>
 </div>

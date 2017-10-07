@@ -10,6 +10,7 @@
 }
 
 
+
 #admin-nav {
     background-color: #43A047;
 }
@@ -24,6 +25,12 @@
     padding-left: 60px;
     padding-right: 60px;
 
+}
+
+#Admin {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
 }
 
 #navLogo {
@@ -132,7 +139,7 @@ textarea {
 .blog-aside {
     background-color: #ffffff;
     border-radius: 5px;
-    margin-left:40px;
+    margin-left:30px;
 }
 
 .blog-main {

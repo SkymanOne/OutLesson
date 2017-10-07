@@ -19,7 +19,7 @@ namespace OutLesson.WebUI.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-		    var list = _unitOfWork.Posts.GetAllByDescending();
+		    var list = _unitOfWork.Posts.GetAll().OrderByDescending(i => i.Time);
 			return View(list);
 		}
 
