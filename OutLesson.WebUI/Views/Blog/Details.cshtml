@@ -1,0 +1,38 @@
+﻿@model OutLesson.WebUI.Models.PostViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+
+<div class="body-content container" id="Form">
+    <div class="text-center">
+        <h2>@Model.Title</h2>
+        <div class="text-info">Дата публикации: @Model.Time.Date.ToShortDateString() | Автор - @Model.Autor.FullName</div>
+        <blockquote>@Html.Raw(Model.Description)</blockquote>
+        <hr/>
+        <div style="font-size: medium; margin-top: 10px">
+            @Html.Raw(Model.Content)
+            
+        </div>
+    </div>
+    <script type="text/javascript" src="https://vk.com/js/api/share.js?95" charset="windows-1251"></script>
+
+    <!-- Put this script tag to the place, where the Share button will be -->
+    <script type="text/javascript">
+        document.write(VK.Share.button(false, { type: "round", text: "Репост" }));
+    </script>
+    <div class="text-center" style="margin-bottom: 10px">
+        @if (User.IsInRole("admin") | User.IsInRole("writer"))
+        {
+            @Html.ActionLink("Edit", "Edit", "Post", new { area = "Admin", id = Model.Id }, new { @class = "btn btn-info" })
+        }
+
+        @if (User.IsInRole("admin") | Model.Autor.UserName == User.Identity.Name)
+        {
+            @: | 
+            @Html.ActionLink("Delete", "Delete", new {area = "Admin", controller = "Post", url = Model.ShortUrl}, new {@class = "btn btn-danger"})
+        }
+    </div>
+    </div>
+

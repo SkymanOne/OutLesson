@@ -1,16 +1,23 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer
 {
-	public class DbInitializer : DropCreateDatabaseAlways<ApplicationContext>
+	public class DbInitializer : CreateDatabaseIfNotExists<ApplicationContext>
 	{
 		protected override void Seed(ApplicationContext context)
 		{
 			var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 			var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+			var superAdminRole = new ApplicationRole
+			{
+				Name = "superadmin",
+				Description = "Роль супер-администратора"
+			};
 
 			//роль админа
 			var adminRole = new ApplicationRole
@@ -37,6 +44,7 @@ namespace OutLesson.DataLayer
 			var userRole = new ApplicationRole {Name = "user", Description = "Роль обыкновенного пользователя"};
 
 			//регистрируем роли
+			roleManager.Create(superAdminRole);
 			roleManager.Create(adminRole);
 			roleManager.Create(moderRole);
 			roleManager.Create(writerRole);
@@ -52,20 +60,9 @@ namespace OutLesson.DataLayer
 			var adminPass = "gn_vneuroka";
 			var adminResult = userManager.Create(admin, adminPass);
 
-			var moder = new ApplicationUser
+			if (adminResult.Succeeded)
 			{
-				Email = "nikgolubtsov@gmail.com",
-				UserName = "nikgolubtsov@gmail.com",
-				FullName = "nikgolubtsov"
-			};
-			var moderPass = "ng_vneuroka";
-			var moderResult = userManager.Create(moder, moderPass);
-
-			if (adminResult.Succeeded & moderResult.Succeeded)
-			{
-				userManager.AddToRoles(admin.Id, adminRole.Name);
-
-				userManager.AddToRoles(moder.Id, moderRole.Name);
+				userManager.AddToRoles(admin.Id, adminRole.Name, superAdminRole.Name);
 			}
 
 			base.Seed(context);

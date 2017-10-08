@@ -1,0 +1,74 @@
+﻿@using OutLesson.DataLayer.ObjectModels
+@model IEnumerable<OutLesson.DataLayer.ObjectModels.ApplicationUser>
+
+@{
+    ViewBag.Title = "Пользователи";
+}
+
+<div class="container-fluid body-content" style="background-color: white">
+
+    <h2>Пользователи</h2>
+    @if (User.IsInRole("admin") | User.IsInRole("moder"))
+    {
+        <p>
+            @Html.ActionLink("Добавить пользовтеля", "RegisterUser")
+        </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                Возраст
+            </th>
+            <th>
+                Ник
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Номер телефона
+            </th>
+            <th>
+                Кол-во постов
+            </th>
+            <th>
+                Действия
+            </th>
+        </tr>
+
+        @foreach (ApplicationUser item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Posts.Count)
+                </td>
+                <td>
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Edit", "EditUser", new { id = item.Id })
+                    }
+                    | @Html.ActionLink("Details", "DetailsUser", new { id = item.Id }) |
+                    @if (User.IsInRole("admin"))
+                    {
+
+                        @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

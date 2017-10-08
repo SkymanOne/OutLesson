@@ -1,0 +1,16 @@
+﻿@model OutLesson.DataLayer.ObjectModels.ApplicationUser
+
+@{
+    ViewBag.Title = "Успешно!";
+}
+
+<div class="container body-content">
+    <div class="jumbotron" id="Form">
+        <h1>Успех!</h1>
+        <hr/>
+        <p>Уважаемый, @Model.FullName, Ваша статья, успешно, опубликована!</p>
+        <P>Вы можете лицезреть на главной странице, нашего портала.</P>
+        <a class="btn btn-success" href="/admin/home/">Вернуться на главную</a>
+    </div>
+</div>
+

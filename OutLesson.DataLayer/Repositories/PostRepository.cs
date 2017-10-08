@@ -1,43 +1,76 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer.Repositories
 {
 	public class PostRepository : IRepostory<Post>
 	{
-		private readonly ApplicationContext db;
+		private readonly ApplicationContext _db;
 
 		public PostRepository(ApplicationContext context)
 		{
-			db = context;
+			_db = context;
 		}
 
 		public void Create(Post item)
 		{
-			db.Posts.Add(item);
+			lock (_db)
+			{
+				_db.Entry(item).State = EntityState.Added;
+			}
 		}
 
 		public void Delete(int id)
 		{
-			var post = db.Posts.Find(id);
-			if (post != null)
-				db.Posts.Remove(post);
+			var post = _db.Posts.Find(id);
+		    if (post != null)
+		        _db.Posts.Remove(post);
 		}
 
 		public Post Get(int id)
 		{
-			return db.Posts.Find(id);
+			return _db.Posts.Find(id);
 		}
 
-		public IEnumerable<Post> GetAll()
+	    public Post GetByUrl(string url)
+	    {
+	        var post = new Post();
+
+	        try
+	        {
+	            post = _db.Posts.Single(s => s.ShortUrl == url);
+	        }
+	        catch (Exception e)
+	        {
+	            post = null;
+	        }
+	        return post;
+	    }
+
+		public IEnumerable<Post> GetAllByDescending()
 		{
-			return db.Posts;
+		    try
+		    {
+		        return from u in _db.Posts orderby u.Id descending select u;
+		    }
+		    catch (Exception e)
+		    {
+                Console.WriteLine(e.StackTrace);
+		        return null;
+		    }
 		}
+
+	    public IEnumerable<Post> GetAll()
+	    {
+	        return _db.Posts;
+	    }
 
 		public void Update(Post item)
 		{
-			db.Entry(item).State = EntityState.Modified;
+			_db.Entry(item).State = EntityState.Modified;
 		}
 	}
 }

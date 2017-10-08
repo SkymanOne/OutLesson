@@ -1,0 +1,65 @@
+﻿@model OutLesson.DataLayer.ObjectModels.Post
+
+@{
+    ViewBag.Title = "Удалить запись";
+}
+<div class="container body-content" id="Form" style="padding-bottom: 10px">
+
+    <h2>Удаление</h2>
+
+    <h3>Вы уверены, что хотите удалить эту статью?</h3>
+    <hr />
+        <h4>@Model.Title</h4>
+        <dl class="dl-horizontal" style="font-size: medium">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.Raw(Html.DisplayFor(model => model.Description))
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
+
+            <dd>
+                @Html.Raw(Html.DisplayFor(model => model.Content))
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ShortUrl)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ShortUrl)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Time)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Time)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                @Html.ActionLink("Bернутсья к списку", "Index")
+            </div>
+        }
+</div>

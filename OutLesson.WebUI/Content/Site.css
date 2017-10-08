@@ -5,24 +5,58 @@
 
 
 .ulclas {
-    color: darkgray;
+    color: white;
     font-size: medium;
 }
 
-footer {
-    padding-top: 10px;
+
+
+#admin-nav {
+    background-color: #43A047;
+}
+.navbar-inverse .navbar-nav > li > a:active, .navbar-inverse .navbar-nav > li > a:active {
+    color: #ffffff;
+    font-weight: bold;
 }
 
-#LoginForm {
+#Form {
     background-color: white;
-    margin-top: 30px;
+    margin-top: 80px;
     padding-left: 60px;
     padding-right: 60px;
 
 }
 
+#AdminPanel {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+}
+
+#navLogo {
+    margin-bottom: 5px;
+}
+
+#RegisterForm {
+    background-color: white;
+    margin-top: 80px;
+    margin-left: 70px;
+    margin-right: 70px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.control-label {
+    font-weight: initial;
+    font-size: large;
+}
+
 #MainContent {
     margin-top:50px;
+}
+
+#MainContentAdmin {
+    margin-top: 70px;
 }
 
 
@@ -39,6 +73,7 @@ footer {
 #MainFooter {
     padding-left: 20px;
     padding-right: 20px;
+    font-size: medium;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -59,7 +94,7 @@ footer {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 400px;
 }
 
 .blog-nav .active:after {
@@ -105,7 +140,7 @@ textarea {
 .blog-aside {
     background-color: #ffffff;
     border-radius: 5px;
-    margin-left:40px;
+    margin-left:30px;
 }
 
 .blog-main {
@@ -154,7 +189,8 @@ textarea {
  */
 
 .blog-post {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+    padding: 0 10px 0 10px;
 }
 
 .blog-post-title {
@@ -206,7 +242,7 @@ textarea {
 
 .carousel {
     height: 500px;
-    margin-bottom: 60px;
+    margin-bottom:30px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {

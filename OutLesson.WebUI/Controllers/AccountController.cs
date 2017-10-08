@@ -1,91 +1,85 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using OutLesson.DataLayer;
-using OutLesson.WebUI.Models;
-using OutLesson.DataLayer.ObjectModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using OutLesson.DataLayer;
+using OutLesson.DataLayer.ObjectModels;
+using OutLesson.DataLayer.Repositories;
+using OutLesson.WebUI.Models;
 
 namespace OutLesson.WebUI.Controllers
 {
     public class AccountController : Controller
     {
-		private ApplicationUserManager ApplicationUserManager
-		{
-			get
-			{
-				return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-			}
-		} 
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
 
-		private IAuthenticationManager AuthenticationManager
-		{
-			get
-			{   
-				return HttpContext.GetOwinContext().Authentication;
-			}
-		}
+        private ApplicationUserManager ApplicationUserManager =>
+            HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-		[HttpGet]
-		[Authorize]
-		public async Task<ActionResult> Index()
-		{
-			ApplicationUser user = null;
-			user = await ApplicationUserManager.FindByEmailAsync(User.Identity.Name);
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
-			return View(user);
-		}
-
-		public ActionResult Login(string returnUrl)
-		{
-			ViewBag.ReturnUrl = returnUrl;
-			return View();
-		}
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Index()
+        {
+            var model = new UserInfoModel();
 
 
-		[HttpPost]
-		[AllowAnonymous]
-		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Login(LoginModel model, string returnUrl)
-		{
-			if (ModelState.IsValid)
-			{
-				ApplicationUser user = null;
+            var user = await ApplicationUserManager.FindByEmailAsync(User.Identity.Name);
+            model.User = user;
+            var posts = _unitOfWork.Posts.GetAll().Where(s => s.Autor.FullName == user.FullName);
 
-				user = await ApplicationUserManager.FindAsync(model.Email, model.Password);
-				if (user != null)
-				{
-					ClaimsIdentity claim = await ApplicationUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-					AuthenticationManager.SignOut();
-					AuthenticationManager.SignIn(new AuthenticationProperties
-					{
-						IsPersistent = true
-					}, claim);
-					if (String.IsNullOrEmpty(returnUrl))
-						return RedirectToAction("Index", "Home");
-					return Redirect(returnUrl);
-				}
-				else
-				{
-					ModelState.AddModelError("", "Неверный логин или пароль");
-				}
-			}
-			ViewBag.ReturnUrl = returnUrl;
+            model.UserPosts = posts;
 
-			return View();
-		}
 
-		public ActionResult LogOut()
-		{
-			AuthenticationManager.SignOut();
-			return RedirectToAction("Login");
-		}
+            return View(model);
+        }
 
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = null;
+
+                user = await ApplicationUserManager.FindAsync(model.Email, model.Password);
+                if (user != null)
+                {
+                    var claim =
+                        await ApplicationUserManager.CreateIdentityAsync(user,
+                            DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
+                    if (string.IsNullOrEmpty(returnUrl))
+                        return RedirectToAction("Index", "Home");
+                    return Redirect(returnUrl);
+                }
+                ModelState.AddModelError("", "Неверный логин или пароль");
+            }
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View();
+        }
+
+        public ActionResult LogOut()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Login");
+        }
     }
 }

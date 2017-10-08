@@ -4,7 +4,10 @@ using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer.Repositories
 {
-	internal class UserRepository : IRepostory<ApplicationUser>
+	/// <summary>
+	/// Репозиторий пользователей (не реализовано)
+	/// </summary>
+	public class UserRepository : IRepostory<ApplicationUser>
 	{
 		private ApplicationUserManager userManager;
 
