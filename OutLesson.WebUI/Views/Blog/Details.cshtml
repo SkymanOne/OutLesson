@@ -23,7 +23,7 @@
         document.write(VK.Share.button(false, { type: "round", text: "Репост" }));
     </script>
     <div class="text-center" style="margin-bottom: 10px">
-        @if (User.IsInRole("writer"))
+        @if (User.IsInRole("admin") | User.IsInRole("writer"))
         {
             @Html.ActionLink("Edit", "Edit", "Post", new { area = "Admin", id = Model.Id }, new { @class = "btn btn-info" })
         }
