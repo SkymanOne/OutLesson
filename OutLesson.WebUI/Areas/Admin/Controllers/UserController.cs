@@ -171,7 +171,6 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
                 {
                     user.PasswordHash = passwordHash.HashPassword(model.NewPasssword);
                 }
-                //BUG: исключение контекста при попытке обновить пользователя
 
                 _unitOfWork.DataContext.Entry(user).State = EntityState.Modified;
                 _unitOfWork.Save();

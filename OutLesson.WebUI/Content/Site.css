@@ -27,7 +27,7 @@
 
 }
 
-#Admin {
+#AdminPanel {
     padding-left: 10px;
     padding-right: 10px;
     background-color: white;
@@ -73,6 +73,7 @@
 #MainFooter {
     padding-left: 20px;
     padding-right: 20px;
+    font-size: medium;
 }
 
 /* Set padding to keep content from hitting the edges */

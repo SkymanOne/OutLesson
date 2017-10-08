@@ -25,17 +25,12 @@ namespace OutLesson.WebUI.Controllers
 
 		public ActionResult About()
 		{
-			ViewBag.Message = "Your application description page.";
-
 			return View();
 		}
 
 
-		[Authorize(Roles = "admin, moder")]
 		public ActionResult Contact()
 		{
-			ViewBag.Message = "Your contact page.";
-
 			return View();
 		}
 	}

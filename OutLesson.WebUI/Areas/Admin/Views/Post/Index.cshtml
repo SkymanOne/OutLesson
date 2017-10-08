@@ -6,7 +6,7 @@
     ViewBag.Title = "Статьи";
 }
 
-<div class="container-fluid body-content" id="Form">
+<div class="container-fluid body-content" style="background-color: white">
 
     <h2>Список опубликованных статей</h2>
 
@@ -19,10 +19,10 @@
                 Заголовок
             </th>
             <th>
-                Описание
+                Ссылка
             </th>
             <th>
-                Ссылка
+                Описание
             </th>
             <th>
                 Дата публикации
@@ -39,19 +39,19 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @item.Title
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @item.ShortUrl
+                </td>
+                <td colspan="1" width="10%">
+                   @item.Description.Substring(0, Math.Min(item.Description.Length, 150))
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ShortUrl)
+                    @item.Time
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem=> item.Autor.FullName)
+                    @item.Autor.FullName
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |

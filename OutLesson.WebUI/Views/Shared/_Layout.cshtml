@@ -6,6 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?149"></script>
+    <script type="text/javascript">
+        VK.init({ apiId: 6211646, onlyWidgets: true});
+    </script>
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -25,14 +29,12 @@
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="ulclas nav navbar-nav nav-pills" id="menu">
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = ""}, new {})</li>
-                    <li>@Html.ActionLink("О программе", "About", "Home", new { area = ""}, new {})</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home", new { area = ""}, new {})</li>
+                    <li>@Html.ActionLink("О проекте", "About", "Home", new { area = ""}, new {})</li>
                 </ul>
 
                 <ul class="ulclas nav navbar-nav navbar-right nav-pills">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        //TODO: добавить просмотр личного профиля
                     <li>@Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName(), "Index", "Account")</li>
                         <li>@Html.ActionLink("В админку","Index", "Home", new {area = "Admin"}, new {})</li>
                         <li>@Html.ActionLink("Выйти", "LogOut", "Account")</li>}
@@ -43,11 +45,19 @@
             </div>
         </div>
     </div>
-    <div id="MainContent">
-        @RenderBody()
-        <hr />
-    </div>
-    <footer class="container bottom" id="MainFooter">
+<div id="MainContent">
+    <!-- VK Widget -->
+    <div id="vk_community_messages"></div>
+    <script type="text/javascript">
+        VK.Widgets.CommunityMessages("vk_community_messages", 109956549, { expandTimeout: "30000", disableExpandChatSound: "1", tooltipButtonText: "Хотите пообщаться?"});
+    </script>
+    
+
+    @RenderBody()
+
+    <hr/>
+</div>
+    <footer class="container-fluid bottom" id="MainFooter">
 
         <p>&copy; @DateTime.Now.Year – #ВнеУрока Org.</p>
     </footer>
