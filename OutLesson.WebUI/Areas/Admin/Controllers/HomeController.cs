@@ -53,6 +53,37 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 		    return PartialView("GetPreviewPost", offerPost);
 	    }
 
+        [HttpGet]
+        public ActionResult EditAboutUs()
+        {
+            var aboutUs = _unitOfWork.DataContext.AboutUs.Find(1);
+            if (aboutUs == null)
+            {
+                aboutUs = new AboutUs()
+                {
+                    Description = "<p>Edit this text pls!</p>",
+                    TimeChange = DateTime.Today
+                };
+
+                _unitOfWork.DataContext.AboutUs.Add(aboutUs);
+                _unitOfWork.Save();
+            }
+            return View(aboutUs);
+        }
+
+        [HttpPost]
+        public ActionResult EditAboutUs(AboutUs model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.TimeChange = DateTime.Today;
+                _unitOfWork.DataContext.Entry(model).State = EntityState.Modified;
+                _unitOfWork.Save();
+                return RedirectToAction("About", "Home", new {area = ""});
+            }
+            return View(model);
+        }
+
 		[HttpGet]
 	    public ActionResult CreatePost()
 	    {

@@ -1,13 +1,29 @@
-﻿@{
-    ViewBag.Title = "About";
-    //TODO: оформить страницу описания проекта, текст в заметках
+﻿@model OutLesson.DataLayer.ObjectModels.AboutUs
+@{
+    ViewBag.Title = "О проекте";
 }
 
-<div class="container-fluid">
+<div class="body-content container" id="Form">
+    <div class="text-center">
+        <h2>О проекте</h2>
+        <div class="text-info">Дата обновления: @Model.TimeChange.Date.ToShortDateString()</div>
+        <hr/>
+        <div style="font-size: medium; margin-top: 10px">
+            @Html.Raw(Model.Description)
+            
+        </div>
+    </div>
+    <script type="text/javascript" src="https://vk.com/js/api/share.js?95" charset="windows-1251"></script>
 
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-    
-    
-    <p>Use this area to provide additional information.</p>
+    <!-- Put this script tag to the place, where the Share button will be -->
+    <script type="text/javascript">
+        document.write(VK.Share.button(false, { type: "round", text: "Репост" }));
+    </script>
+    <div class="text-center" style="margin-bottom: 10px">
+        @if (User.IsInRole("admin") | User.IsInRole("writer"))
+        {
+            @Html.ActionLink("Edit", "EditAboutUs", "Home", new { area = "Admin", id = Model.Id }, new { @class = "btn btn-info" })
+        }
+    </div>
 </div>
+

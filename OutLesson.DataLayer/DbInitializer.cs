@@ -1,11 +1,12 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer
 {
-	public class DbInitializer : DropCreateDatabaseIfModelChanges<ApplicationContext>
+	public class DbInitializer : CreateDatabaseIfNotExists<ApplicationContext>
 	{
 		protected override void Seed(ApplicationContext context)
 		{

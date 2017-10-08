@@ -115,7 +115,12 @@
     <Compile Include="Migrations\201709041628164_Created ShortUrl.Designer.cs">
       <DependentUpon>201709041628164_Created ShortUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710081628241_Adding AboutUs Data.cs" />
+    <Compile Include="Migrations\201710081628241_Adding AboutUs Data.Designer.cs">
+      <DependentUpon>201710081628241_Adding AboutUs Data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ObjectModels\AboutUs.cs" />
     <Compile Include="ObjectModels\ApplicationRole.cs" />
     <Compile Include="ObjectModels\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -147,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709041628164_Created ShortUrl.resx">
       <DependentUpon>201709041628164_Created ShortUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710081628241_Adding AboutUs Data.resx">
+      <DependentUpon>201710081628241_Adding AboutUs Data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

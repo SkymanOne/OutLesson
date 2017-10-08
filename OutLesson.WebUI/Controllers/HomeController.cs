@@ -25,7 +25,8 @@ namespace OutLesson.WebUI.Controllers
 
 		public ActionResult About()
 		{
-			return View();
+		    var data = _unitOfWork.DataContext.AboutUs.Find(1);
+			return View(data);
 		}
 
 

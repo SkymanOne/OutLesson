@@ -13,6 +13,7 @@ namespace OutLesson.DataLayer
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Tag> Tags { get; set; }
 		public DbSet<OfferPost> OfferPosts { get; set; }
+        public  DbSet<AboutUs> AboutUs { get; set; }
 
 		public static ApplicationContext Create()
 		{

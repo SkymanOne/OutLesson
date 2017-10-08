@@ -7,6 +7,7 @@ namespace OutLesson.DataLayer.Migrations
 		public Configuration()
 		{
 			AutomaticMigrationsEnabled = true;
+		    ContextKey = "OutLesson.DataLayer.ApplicationContext";
 		}
 
 		protected override void Seed(ApplicationContext context)
