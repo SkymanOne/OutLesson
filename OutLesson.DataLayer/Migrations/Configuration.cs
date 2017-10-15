@@ -1,29 +1,31 @@
-using System.Data.Entity.Migrations;
-
 namespace OutLesson.DataLayer.Migrations
 {
-	internal sealed class Configuration : DbMigrationsConfiguration<ApplicationContext>
-	{
-		public Configuration()
-		{
-			AutomaticMigrationsEnabled = true;
-		    ContextKey = "OutLesson.DataLayer.ApplicationContext";
-		}
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-		protected override void Seed(ApplicationContext context)
-		{
-			//  This method will be called after migrating to the latest version.
+    internal sealed class Configuration : DbMigrationsConfiguration<OutLesson.DataLayer.ApplicationContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+        }
 
-			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-			//  to avoid creating duplicate seed data. E.g.
-			//
-			//    context.People.AddOrUpdate(
-			//      p => p.FullName,
-			//      new Person { FullName = "Andrew Peters" },
-			//      new Person { FullName = "Brice Lambson" },
-			//      new Person { FullName = "Rowan Miller" }
-			//    );
-			//
-		}
-	}
+        protected override void Seed(OutLesson.DataLayer.ApplicationContext context)
+        {
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data. E.g.
+            //
+            //    context.People.AddOrUpdate(
+            //      p => p.FullName,
+            //      new Person { FullName = "Andrew Peters" },
+            //      new Person { FullName = "Brice Lambson" },
+            //      new Person { FullName = "Rowan Miller" }
+            //    );
+            //
+        }
+    }
 }

@@ -6,7 +6,7 @@ using OutLesson.DataLayer.ObjectModels;
 
 namespace OutLesson.DataLayer
 {
-	public class DbInitializer : CreateDatabaseIfNotExists<ApplicationContext>
+	public class DbInitializer : DropCreateDatabaseIfModelChanges<ApplicationContext>
 	{
 		protected override void Seed(ApplicationContext context)
 		{
