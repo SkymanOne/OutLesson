@@ -16,6 +16,7 @@ using OutLesson.DataLayer.Repositories;
 
 namespace OutLesson.WebUI.Controllers
 {
+    [RoutePrefix("blog")]
 	public class BlogController : Controller
 	{
 		private readonly UnitOfWork _unitOfWork;
@@ -53,6 +54,7 @@ namespace OutLesson.WebUI.Controllers
 			return View(model);
 		}
 
+        [Route("{url}")]
 	    public ActionResult Details(string url)
         {
             if (!string.IsNullOrEmpty(url))

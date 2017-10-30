@@ -22,7 +22,7 @@
     <div class="text-center" style="margin-bottom: 10px">
         @if (User.IsInRole("admin") | User.IsInRole("writer"))
         {
-            @Html.ActionLink("Edit", "EditAboutUs", "Home", new { area = "Admin", id = Model.Id }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Редактировать", "EditAboutUs", "Home", new { area = "Admin", id = Model.Id }, new { @class = "btn btn-info" })
         }
     </div>
 </div>

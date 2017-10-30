@@ -101,11 +101,18 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 				model.Autor = currentUser;
                 string shortUrl = createShortUrl.ReplaceString(model.Title);
 
+                //проверка наличия поста с таким же url
 			    var checkShortUrl = _unitOfWork.Posts.GetByUrl(shortUrl);
-
 			    if (checkShortUrl != null)
 			    {
 			        ModelState.AddModelError("", "Заголовки не должны совпадать");
+			        return View(model);
+			    }
+
+                //проверка строки на null и пробелы
+			    if (String.IsNullOrWhiteSpace(shortUrl))
+			    {
+			        ModelState.AddModelError("", "Некорректный заголовок");
 			        return View(model);
 			    }
 
