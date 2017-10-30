@@ -28,11 +28,5 @@ namespace OutLesson.WebUI.Controllers
 		    var data = _unitOfWork.DataContext.AboutUs.Find(1);
 			return View(data);
 		}
-
-
-		public ActionResult Contact()
-		{
-			return View();
-		}
 	}
 }
