@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,23 +26,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/home/index"><img src="~/Content/img/logo.png" width="160" height="40"/></a>
             </div>
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                <a class="navbar-brand" href="/home/index"><img src="~/Content/img/logo.png" width="160" height="40"/></a>
                 <ul class="ulclas nav navbar-nav nav-pills" id="menu">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = ""}, new {})</li>
-                    <li>@Html.ActionLink("О проекте", "About", "Home", new { area = ""}, new {})</li>
+                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home", new {area = ""}, new {})</li>
+                    <li>@Html.ActionLink("О проекте", "About", "Home", new {area = ""}, new {})</li>
                 </ul>
 
                 <ul class="ulclas nav navbar-nav navbar-right nav-pills">
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li>@Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName(), "Index", "Account")</li>
-                        <li>@Html.ActionLink("В админку","Index", "Home", new {area = "Admin"}, new {})</li>
+                        <li>@Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName(), "Index", "Account")</li>
+                        <li>@Html.ActionLink("В админку", "Index", "Home", new {area = "Admin"}, new {})</li>
                         <li>@Html.ActionLink("Выйти", "LogOut", "Account")</li>}
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Войти", "Login", "Account")</li> }
+                        <li>@Html.ActionLink("Войти", "Login", "Account")</li>
+                    }
                 </ul>
             </div>
         </div>
@@ -51,7 +52,7 @@
     <!-- VK Widget -->
     <div id="vk_community_messages"></div>
     <script type="text/javascript">
-        VK.Widgets.CommunityMessages("vk_community_messages", 109956549, { expandTimeout: "30000", disableExpandChatSound: "1", tooltipButtonText: "Хотите пообщаться?"});
+        VK.Widgets.CommunityMessages("vk_community_messages", 109956549, { expandTimeout: "300000", disableExpandChatSound: "1", tooltipButtonText: "Хотите пообщаться?"});
     </script>
     
 

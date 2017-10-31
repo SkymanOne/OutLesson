@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using OutLesson.DataLayer;
 using OutLesson.DataLayer.ObjectModels;
 using OutLesson.DataLayer.Repositories;
 using OutLesson.WebUI.Areas.Admin.Models;
+using OutLesson.WebUI.Utilities;
 
 namespace OutLesson.WebUI.Areas.Admin.Controllers
 {
@@ -23,7 +25,7 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
         private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
-        // GET: Admin/Post
+        readonly CreateShortUrl createShortUrl = new CreateShortUrl();
 
         [HttpGet]
         public ActionResult Index()
@@ -33,6 +35,52 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
             if (postList != null)
                 return View(postList);
             return HttpNotFound();
+        }
+
+        [HttpGet]
+        public ActionResult CreatePost()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePost(PostModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Mapper.Initialize(c => c.CreateMap<PostModel, Post>());
+                var currentUser = _unitOfWork.DataContext.Users.Find(User.Identity.GetUserId());
+
+                model.Autor = currentUser;
+                string shortUrl = createShortUrl.ReplaceString(model.Title);
+
+                //проверка наличия поста с таким же url
+                var checkShortUrl = _unitOfWork.Posts.GetByUrl(shortUrl);
+                if (checkShortUrl != null)
+                {
+                    ModelState.AddModelError("", "Заголовки не должны совпадать");
+                    return View(model);
+                }
+
+                //проверка строки на null и пробелы
+                if (String.IsNullOrWhiteSpace(shortUrl))
+                {
+                    ModelState.AddModelError("", "Некорректный заголовок");
+                    return View(model);
+                }
+
+                model.ShortUrl = shortUrl;
+
+
+
+                var post = Mapper.Map<PostModel, Post>(model);
+
+                _unitOfWork.Posts.Create(post);
+                _unitOfWork.Save();
+
+                return View("SuccessCreatePost", currentUser);
+            }
+            return View(model);
         }
 
         [HttpGet]

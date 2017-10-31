@@ -236,8 +236,8 @@
     <Content Include="Areas\Admin\Views\User\GetUsers.cshtml" />
     <Content Include="Areas\Admin\Views\User\DeleteUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\DetailsUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\CreatePost.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\SuccessCreatePost.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\CreatePost.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\SuccessCreatePost.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\User\EditUser.cshtml" />
@@ -365,6 +365,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Blog\Success.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

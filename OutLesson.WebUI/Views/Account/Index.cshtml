@@ -7,7 +7,7 @@
 <div class="body-content container" id="Form">
     
 <div class="body-content">
-    <h2>Профиль пользователя</h2>
+    <h3>Профиль пользователя</h3>
     <hr />
     <ul style="font-size: x-large;"  class="list-group">
         <li>Ваш ник: @Html.DisplayFor(model => model.User.FullName)</li>
@@ -44,11 +44,12 @@
             {
                 ViewBag.Role = "SuperAdmin";
             }
-
             Ваша роль: @ViewBag.Role
         </li>
     </ul>
-    <p>Страница находится в разработке.</p>
-    <div style="padding-bottom: 10px"> @Html.ActionLink("Домой", "Index", "Home", new {area = ""}, new {@class = "btn btn-default" }) </div>
+    <div style="margin-bottom: 10px">
+    @Html.ActionLink("Домой", "Index", "Home", new {area = ""}, new {@class = "btn btn-default" })
+    @Html.ActionLink("Изменить", "Edit", "Account", new {area = ""}, new {@class = "btn btn-info"})
+        </div>
 </div>
 </div>

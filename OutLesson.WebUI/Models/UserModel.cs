@@ -24,7 +24,6 @@ namespace OutLesson.WebUI.Models
 		public string Email { get; set; }
 
 		[Display(Name = "Возраст маслёнка")]
-		[DataType(DataType.PhoneNumber)]
 		public int Year { get; set; }
 
 		[Display(Name = "Телефон")]
@@ -42,4 +41,37 @@ namespace OutLesson.WebUI.Models
 		[Display(Name = "Подтверди свой мега сложный пароль, я оценю это")]
 		public string ConfirmPassword { get; set; }
 	}
+
+    public class EditUserModel
+    {
+        [HiddenInput]
+        public string Id { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Ник")]
+        public string FullName { get; set; }
+
+        public string Email { get; set; }
+
+        [Display(Name = "Возраст")]
+        public int Year { get; set; }
+
+        [Display(Name = "Телефон")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Старый пароль")]
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Введите новый пароль")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "Пароли не совпадают")]
+        [Display(Name = "Подтверди свой мега сложный пароль, я оценю это")]
+        public string ConfirmNewPassword { get; set; }
+    }
 }

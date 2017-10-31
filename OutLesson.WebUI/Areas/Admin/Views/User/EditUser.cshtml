@@ -20,7 +20,6 @@
 
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.SecurityStamp)
             @Html.HiddenFor(model => model.PasswordHash)
             @Html.HiddenFor(model => model.EmailConfirmed)
@@ -70,16 +69,15 @@
                     @Html.ValidationMessageFor(model => model.NewPasssword, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Обновить" class="btn btn-default" />
+            
+            <div class="text-center" style="margin-bottom: 10px">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Обновить" class="btn btn-success" />
+                    </div>
                 </div>
+                @Html.ActionLink("Вернуться", "Index", "Account", new {area = ""}, new {@class = "btn btn-danger"})
             </div>
         </div>
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "GetUsers")
-    </div>
 </div>

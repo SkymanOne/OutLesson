@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -38,12 +40,60 @@ namespace OutLesson.WebUI.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Edit()
+        {
+            Mapper.Initialize(config => config.CreateMap<ApplicationUser, EditUserModel>());
+            var user = await ApplicationUserManager.FindByEmailAsync(User.Identity.Name);
+            var model = Mapper.Map<ApplicationUser, EditUserModel>(user);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> Edit(EditUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var user = await ApplicationUserManager.FindByEmailAsync(User.Identity.Name);
+                user.FullName = model.FullName;
+                user.Year = model.Year;
+                user.Email = model.Email;
+                user.UserName = model.Email;
+                user.PhoneNumber = model.PhoneNumber;
+
+                var res = await ApplicationUserManager.UpdateAsync(user);
+
+                if (!res.Succeeded)
+                {
+                    ModelState.AddModelError("", "Ошибка обновления пользователя");
+                }
+
+                if (!String.IsNullOrWhiteSpace(model.OldPassword))
+                {
+
+                    var result = await ApplicationUserManager.ChangePasswordAsync(User.Identity.GetUserId(),
+                        model.OldPassword,
+                        model.NewPassword);
+                    if (!result.Succeeded)
+                    {
+                        ModelState.AddModelError("", "Неверный старый пароль");
+                        return View(model);
+                    }
+                }
+                return RedirectToAction("Index", "Account");
+            }
+            return View(model);
+        }
+
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
 
         [HttpPost]
         [AllowAnonymous]

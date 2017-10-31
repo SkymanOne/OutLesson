@@ -29,7 +29,6 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 
 	    private readonly UnitOfWork _unitOfWork = new UnitOfWork();
 
-	    readonly CreateShortUrl createShortUrl = new CreateShortUrl();
 
 		// GET: Admin/Home
 		[HttpGet]
@@ -37,8 +36,6 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
 		{
 			OfferPostRepository offerPosts = _unitOfWork.OfferPosts;
 			//TODO: реализовать вывод постов на модерацию
-
-			ViewBag.Text = createShortUrl.ReplaceString("Какой-то текст!");
 
 			return RedirectToAction("Index", "Post");
         }
@@ -83,52 +80,6 @@ namespace OutLesson.WebUI.Areas.Admin.Controllers
             }
             return View(model);
         }
-
-		[HttpGet]
-	    public ActionResult CreatePost()
-	    {
-		    return View();
-	    }
-
-		[HttpPost]
-		public ActionResult CreatePost(PostModel model)
-		{
-			if (ModelState.IsValid)
-			{
-				Mapper.Initialize(c => c.CreateMap<PostModel, Post>());
-				var currentUser = _unitOfWork.DataContext.Users.Find(User.Identity.GetUserId());
-
-				model.Autor = currentUser;
-                string shortUrl = createShortUrl.ReplaceString(model.Title);
-
-                //проверка наличия поста с таким же url
-			    var checkShortUrl = _unitOfWork.Posts.GetByUrl(shortUrl);
-			    if (checkShortUrl != null)
-			    {
-			        ModelState.AddModelError("", "Заголовки не должны совпадать");
-			        return View(model);
-			    }
-
-                //проверка строки на null и пробелы
-			    if (String.IsNullOrWhiteSpace(shortUrl))
-			    {
-			        ModelState.AddModelError("", "Некорректный заголовок");
-			        return View(model);
-			    }
-
-			    model.ShortUrl = shortUrl;
-
-                
-
-				var post = Mapper.Map<PostModel, Post>(model);
-
-				_unitOfWork.Posts.Create(post);
-				_unitOfWork.Save();
-
-				return View("SuccessCreatePost", currentUser);
-			}
-			return View(model);
-		}
 		
     }
 }
